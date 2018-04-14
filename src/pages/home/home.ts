@@ -12,6 +12,9 @@ import {ClientsProvider} from '../../providers/clients/clients';
 export class HomePage {
 
   public clients: any;
+  Name: String;
+
+
 
   constructor(public navCtrl: NavController, public myService : ClientsProvider) {
     console.log("inside");
@@ -39,6 +42,7 @@ export class HomePage {
       if (doc) {
         this.clients = doc.data();
         console.info("** name: " + this.clients.Name);
+        this.Name = this.clients.Name;
       }
     })
     .catch((error: any) =>
