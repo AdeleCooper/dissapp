@@ -13,6 +13,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 import firebase from "firebase";
+import { ClientsProvider } from '../providers/clients/clients';
 //import { credentials } from './config';
 
 var credentials = {
@@ -47,7 +48,8 @@ firebase.initializeApp(credentials);
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    ClientsProvider
   ]
 })
 export class AppModule {}

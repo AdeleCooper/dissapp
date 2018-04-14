@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import firebase from 'firebase';
 import 'firebase/firestore';
+import {ClientsProvider} from '../../providers/clients/clients';
+
 
 @Component({
   selector: 'page-home',
@@ -9,22 +11,29 @@ import 'firebase/firestore';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public myService : ClientsProvider) {
     console.log("inside");
-    let db = firebase.firestore();
+    this.getData();
 
-    db.collection("users").doc("new").set({
-      name: "john"
-    }
-    ).then((data)=>{
-      console.log(data)
-      console.log("hi")})
-    // }).catch((error)=>{
-    //   console.log("error")
-    // })
+    // let db = firebase.firestore();
 
-    console.log("inside2");
+    // db.collection("users").doc("new").set({
+    //   name: "john"
+    // }
+    // ).then((data)=>{
+    //   console.log(data)
+    //   console.log("hi")})
+    // // }).catch((error)=>{
+    // //   console.log("error")
+    // // })
+
+    // console.log("inside2");
 
   };
-
+  
+  getData(){
+    this.myService.getClient();
+    //this.myService.addClient();
+    //this.myService.updateClient();
+  }
 }
