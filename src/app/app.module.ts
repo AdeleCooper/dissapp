@@ -6,6 +6,10 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { PlannerHomePage } from '../pages/planner-home/planner-home';
+import { SignInPage } from '../pages/sign-in/sign-in';
+import { SignUpPage } from '../pages/sign-up/sign-up';
+import { SignUpOnboardingPage } from '../pages/sign-up-onboarding/sign-up-onboarding';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -30,8 +34,11 @@ firebase.initializeApp(credentials);
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
-  ],
+    HomePage,
+    PlannerHomePage,
+    SignInPage,
+    SignUpPage,
+    SignUpOnboardingPage ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
@@ -43,7 +50,11 @@ firebase.initializeApp(credentials);
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    PlannerHomePage,
+    SignInPage,
+    SignUpPage,
+    SignUpOnboardingPage    
   ],
   providers: [
     StatusBar,

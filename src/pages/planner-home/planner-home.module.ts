@@ -4,7 +4,7 @@ import { PlannerHomePage } from './planner-home';
 
 @NgModule({
   declarations: [
-    PlannerHomePage,
+    //PlannerHomePage,
   ],
   imports: [
     IonicPageModule.forChild(PlannerHomePage),
