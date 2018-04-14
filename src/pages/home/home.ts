@@ -11,6 +11,8 @@ import {ClientsProvider} from '../../providers/clients/clients';
 })
 export class HomePage {
 
+  public clients: any;
+
   constructor(public navCtrl: NavController, public myService : ClientsProvider) {
     console.log("inside");
     this.getData();
@@ -31,11 +33,21 @@ export class HomePage {
 
   };
   
-  getData(){
-    var client = this.myService.getClient();
-    if (client) {
-      console.info('client name: ' + client.name);
-    }
+  getData() {
+    this.myService.getClient().then((doc) =>
+    {
+      if (doc) {
+        this.clients = doc.data();
+        console.info("** name: " + this.clients.Name);
+      }
+    })
+    .catch((error: any) =>
+    {
+      console.error("error received: " + error);
+    });
+    // if (client) {
+    //   console.info('client name: ' + client.name);
+    // }
     
     //this.myService.addClient();
     //this.myService.updateClient();

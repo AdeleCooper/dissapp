@@ -18,30 +18,52 @@ export class ClientsProvider {
     this.db = firebase.firestore();
   }
 
-  getClient(){
+  getClient() : Promise<any> {
     //let db = firebase.firestore();
 
   //   db.collection("Clients").doc("KXLiOkFJOrDfrW7oVz3S").get().then((data)=>{
   //        console.log(data.id)});
-  // }
-    var self = this;
-    this.db.collection("Clients").doc("KXLiOkFJOrDfrW7oVz3S").get().then(function (doc) {
-      if (doc.exists) {
-        var d = doc.data();
-        self.name = d.name;
-        console.log("Document data:", doc.data());
-        return { 'name': d.name };
-        //console.log(doc.data.toString);
-      } else {
-        // doc.data() will be undefined in this case
-        console.log("No such document!");
-      }
-    }).catch(function (error) {
-      console.log("Error getting document:", error);
-    });
-    return null;
-  };
+  // 
 
+  return new Promise((resolve, reject) =>
+      {
+         this.db
+         .collection("Clients")
+         .doc("KXLiOkFJOrDfrW7oVz3S")
+         .get()
+         .then((doc : any) =>
+         {
+           if (doc.exists) {
+            //console.log('resolving');
+            resolve(doc);
+           } else {
+            //console.log('rejecting due to non-existent doc');
+             reject("doc doesn't exist");
+          }
+         })
+         .catch((error : any) =>
+         {
+          console.log('rejecting');
+          reject(error);
+         });
+      });
+
+    // var self = this;
+    // return this.db.collection("Clients").doc("KXLiOkFJOrDfrW7oVz3S").get().then(function (doc) {
+    //   if (doc.exists) {
+    //     var d = doc.data();
+    //     self.name = d.name;
+    //     console.log("Document data:", doc.data());
+    //     return { 'name': d.name };
+    //     //console.log(doc.data.toString);
+    //   } else {
+    //     // doc.data() will be undefined in this case
+    //     console.log("No such document!");
+    //   }
+    // }).catch(function (error) {
+    //   console.log("Error getting document:", error);
+    // });
+  }
 
   addClient(){
 
