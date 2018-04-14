@@ -56,4 +56,10 @@ export class HomePage {
     //this.myService.addClient();
     //this.myService.updateClient();
   }
+
+  showSprintsClicked() : void
+  {
+     //this.navCtrl.push('SprintsPage');
+     this.navCtrl.push('PlannerHomePage');
+  }  
 }
