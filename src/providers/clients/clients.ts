@@ -24,10 +24,13 @@ export class ClientsProvider {
   //   db.collection("Clients").doc("KXLiOkFJOrDfrW7oVz3S").get().then((data)=>{
   //        console.log(data.id)});
   // }
-
+    var self = this;
     this.db.collection("Clients").doc("KXLiOkFJOrDfrW7oVz3S").get().then(function (doc) {
       if (doc.exists) {
+        var d = doc.data();
+        self.name = d.name;
         console.log("Document data:", doc.data());
+        return { 'name': d.name };
         //console.log(doc.data.toString);
       } else {
         // doc.data() will be undefined in this case
@@ -36,6 +39,7 @@ export class ClientsProvider {
     }).catch(function (error) {
       console.log("Error getting document:", error);
     });
+    return null;
   };
 
 

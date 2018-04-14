@@ -32,7 +32,11 @@ export class HomePage {
   };
   
   getData(){
-    this.myService.getClient();
+    var client = this.myService.getClient();
+    if (client) {
+      console.info('client name: ' + client.name);
+    }
+    
     //this.myService.addClient();
     //this.myService.updateClient();
   }
