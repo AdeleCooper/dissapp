@@ -12,7 +12,19 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
-import { credentials } from './config';
+import firebase from "firebase";
+//import { credentials } from './config';
+
+var credentials = {
+      apiKey: "AIzaSyA4d7whowjrUKOI_x42XpPlczsVhjr7Rio",
+      authDomain: "dissertation-84cc9.firebaseapp.com",
+      databaseURL: "https://dissertation-84cc9.firebaseio.com",
+      projectId: "dissertation-84cc9",
+      storageBucket: "dissertation-84cc9.appspot.com",
+      messagingSenderId: "503275249879"
+}  
+
+firebase.initializeApp(credentials);
 
 @NgModule({
   declarations: [
@@ -22,7 +34,7 @@ import { credentials } from './config';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(credentials.firebase),
+    //AngularFireModule.initializeApp(credentials.firebase),
     AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,
     AngularFireDatabaseModule
