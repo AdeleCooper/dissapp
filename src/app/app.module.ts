@@ -10,6 +10,7 @@ import { PlannerHomePage } from '../pages/planner-home/planner-home';
 import { SignInPage } from '../pages/sign-in/sign-in';
 import { SignUpPage } from '../pages/sign-up/sign-up';
 import { SignUpOnboardingPage } from '../pages/sign-up-onboarding/sign-up-onboarding';
+import { SprintsPage } from '../pages/sprints/Sprints';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -38,7 +39,8 @@ firebase.initializeApp(credentials);
     PlannerHomePage,
     SignInPage,
     SignUpPage,
-    SignUpOnboardingPage ],
+    SignUpOnboardingPage,
+    SprintsPage ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
@@ -54,7 +56,8 @@ firebase.initializeApp(credentials);
     PlannerHomePage,
     SignInPage,
     SignUpPage,
-    SignUpOnboardingPage    
+    SignUpOnboardingPage,
+    SprintsPage    
   ],
   providers: [
     StatusBar,
