@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import firebase from 'firebase';
-import 'firebase/firestore';
-import {ClientsProvider} from '../../providers/clients/clients';
+import { NavController } from 'ionic-angular';
+//import firebase from 'firebase';
+//import 'firebase/firestore';
+import { ClientsProvider } from '../../providers/clients/clients';
 import { PlannerHomePage } from '../planner-home/planner-home';
 
 @Component({
@@ -14,7 +14,7 @@ export class HomePage {
   public clients: any;
   Name: String;
 
-  constructor(public navCtrl: NavController, public myService : ClientsProvider) {
+  constructor(public navCtrl: NavController, public myService: ClientsProvider) {
     console.log("inside");
     this.getData();
 
