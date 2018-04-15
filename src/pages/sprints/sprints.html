@@ -17,6 +17,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
+<!--
   <ion-grid style="padding: 0px;">
 
     <ion-row>
@@ -66,12 +67,17 @@
 
     </ion-row>
   </ion-grid>
-<!--
+-->
   <div *ngIf="currentSprint != null">
     <p>Current Sprint</p>
     <p>Start: {{currentSprint.StartDate}}</p>
     <p>End: {{currentSprint.EndDate}}</p>
-    <p>Upcoming - TBD need to fetch tasks</p>
+    <p>Upcoming</p>
+    <ion-list>
+      <ion-item *ngFor="let task of currentSprintTasks">
+        <p>Description: {{task.Description}} Size: {{task.Size}}</p>
+      </ion-item>
+    </ion-list>
   </div>
   <ion-list>
     <ion-item *ngFor="let sprint of inactiveSprints">
@@ -84,5 +90,4 @@
       <p>Tasks Completed: {{sprint.CompletedTasks}}</p>
     </ion-item>
   </ion-list>
--->
 </ion-content>
