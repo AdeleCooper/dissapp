@@ -20,6 +20,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import firebase from "firebase";
 import { ClientsProvider } from '../providers/clients/clients';
 import { SprintsProvider } from '../providers/sprints/sprints';
+import { TasksProvider } from '../providers/tasks/tasks';
 //import { credentials } from './config';
 
 var credentials = {
@@ -65,7 +66,8 @@ firebase.initializeApp(credentials);
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ClientsProvider,
-    SprintsProvider
+    SprintsProvider,
+    TasksProvider
   ]
 })
 export class AppModule {}
