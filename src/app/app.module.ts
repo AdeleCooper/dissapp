@@ -12,13 +12,14 @@ import { SignUpPage } from '../pages/sign-up/sign-up';
 import { SignUpOnboardingPage } from '../pages/sign-up-onboarding/sign-up-onboarding';
 import { SprintsPage } from '../pages/sprints/Sprints';
 
-import { AngularFireModule } from 'angularfire2';
+//import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 import firebase from "firebase";
 import { ClientsProvider } from '../providers/clients/clients';
+import { SprintsProvider } from '../providers/sprints/sprints';
 //import { credentials } from './config';
 
 var credentials = {
@@ -63,7 +64,8 @@ firebase.initializeApp(credentials);
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ClientsProvider
+    ClientsProvider,
+    SprintsProvider
   ]
 })
 export class AppModule {}
