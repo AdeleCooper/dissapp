@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import firebase from 'firebase';
 import 'firebase/firestore';
 import {ClientsProvider} from '../../providers/clients/clients';
-
+import { PlannerHomePage } from '../planner-home/planner-home';
 
 @Component({
   selector: 'page-home',
@@ -13,8 +13,6 @@ export class HomePage {
 
   public clients: any;
   Name: String;
-
-
 
   constructor(public navCtrl: NavController, public myService : ClientsProvider) {
     console.log("inside");
@@ -60,6 +58,6 @@ export class HomePage {
   showSprintsClicked() : void
   {
      //this.navCtrl.push('SprintsPage');
-     this.navCtrl.push('PlannerHomePage');
+     this.navCtrl.push(PlannerHomePage);
   }  
 }
