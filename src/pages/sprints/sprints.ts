@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 //import firebase from 'firebase';
 import 'firebase/firestore';
 import { SprintsProvider} from '../../providers/sprints/sprints';
 import { TasksProvider } from '../../providers/tasks/tasks';
 import { ClientsProvider } from '../../providers/clients/clients';
+import { SprintFormPage } from '../sprint-form/sprint-form';
 
 /**
  * Generated class for the SprintsPage page.
@@ -24,7 +25,10 @@ export class SprintsPage {
   public inactiveSprints: any = [];
   public sprintIds: any = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public sprintsService: SprintsProvider, public tasksService: TasksProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              public modalCtrl: ModalController,
+              public sprintsService: SprintsProvider, public tasksService: TasksProvider) {
+    console.log('SprintsPage constructor');
     this.getSprints();
   }
 
@@ -79,5 +83,20 @@ export class SprintsPage {
     {
       console.error("getSprints - error received: " + error);
     });
+  }
+
+  addSprintClicked() : void
+  {
+    console.log("addSprintClicked");
+    let modal = this.modalCtrl.create(SprintFormPage);
+
+    var self = this;
+
+    modal.onDidDismiss(data => {
+      console.log('add sprint data: ' + JSON.stringify(data));
+      // TODO - call provider to update the database with new data
+      // TODO - then try calling self.getSprints to re-fetch all sprints and update UI
+    });
+    modal.present();
   }
 }

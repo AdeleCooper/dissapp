@@ -11,6 +11,7 @@ import { SignInPage } from '../pages/sign-in/sign-in';
 import { SignUpPage } from '../pages/sign-up/sign-up';
 import { SignUpOnboardingPage } from '../pages/sign-up-onboarding/sign-up-onboarding';
 import { SprintsPage } from '../pages/sprints/Sprints';
+import { SprintFormPage } from '../pages/sprint-form/sprint-form';
 
 //import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -43,7 +44,8 @@ firebase.initializeApp(credentials);
     SignInPage,
     SignUpPage,
     SignUpOnboardingPage,
-    SprintsPage ],
+    SprintsPage,
+    SprintFormPage ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
@@ -60,7 +62,8 @@ firebase.initializeApp(credentials);
     SignInPage,
     SignUpPage,
     SignUpOnboardingPage,
-    SprintsPage    
+    SprintsPage,
+    SprintFormPage
   ],
   providers: [
     StatusBar,

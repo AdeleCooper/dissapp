@@ -62,9 +62,12 @@
       </ion-card>
 
     </ion-row>
+    <ion-row>
+      <button (click)="addSprintClicked()">Add New Sprint</button>
+    </ion-row>
   </ion-grid>
 
-  <!-- <div *ngIf="currentSprint != null">
+    <!-- <div *ngIf="currentSprint != null">
     <p>Current Sprint</p>
     <p>Start: {{currentSprint.StartDate}}</p>
     <p>End: {{currentSprint.EndDate}}</p>
@@ -85,5 +88,5 @@
       <p>Weight: {{sprint.Weight}}</p>
       <p>Tasks Completed: {{sprint.CompletedTasks}}</p>
     </ion-item>
-  </ion-list>
-</ion-content> -->
+  </ion-list> -->
+</ion-content>
