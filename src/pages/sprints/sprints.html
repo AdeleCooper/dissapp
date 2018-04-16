@@ -17,49 +17,45 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-<!--
+
   <ion-grid style="padding: 0px;">
 
     <ion-row>
 
-      <ion-card>
+      <ion-card class="currentSprintCard" *ngIf="currentSprint != null">
 
         <ion-card-header>
-          <p>Current Sprint: 14/03/18 - 20/03/18</p>
+          <p>
+            <strong>Current Sprint</strong> 
+          </p>
+          <p class="headerDates"> {{currentSprint.Title}}: {{currentSprint.StartDate}} - {{currentSprint.EndDate}}</p>
         </ion-card-header>
         <div style="font-size: small;">
-        <ion-item-divider detail-push>Upcoming</ion-item-divider>
-        <ion-item no-lines text-wrap>
-          <p item-start>-</p>
-          <strong>Sarah</strong>: go over quiz answers
-          <p item-end>S</p>
-        </ion-item>
-        <ion-item no-lines text-wrap>
-          <p item-start>-</p>
-          <strong>Andrew and Dan</strong>: organise venue showing
-          <p item-end>M</p>
-        </ion-item>
-        <ion-item no-lines text-wrap>
-          <p item-start>-</p>
-          <strong>Sarah</strong>: list of possible themes
-          <p item-end>M</p>
-        </ion-item>
-      </div>
+          <ion-item-divider detail-push>Upcoming</ion-item-divider>
+          <div *ngFor="let task of currentSprintTasks;let i=index">
+            <ion-item no-lines text-wrap *ngIf="i<3">
+              <p item-start>-</p>
+              <strong>{{task.User}}</strong>: {{task.Description}}
+              <p item-end>{{task.Size}}</p>
+            </ion-item>
+          </div>
+        </div>
       </ion-card>
     </ion-row>
 
     <ion-row>
 
-      <ion-card>
+      <ion-card *ngFor="let sprint of inactiveSprints">
 
         <ion-card-header>
-          Sprint title: 00/00/00 - 00/00/00 Planned
+            {{sprint.Title}} 
         </ion-card-header>
 
         <ion-card-content>
-
-         <p>7/7 Tasks complete</p> 
-         <p>45 weight</p> 
+          <p>{{sprint.StartDate}} - {{sprint.EndDate}}</p>
+          <p>{{sprint.Status}}</p>
+          <p>Tasks Completed: {{sprint.CompletedTasks}}</p>
+          <p>{{sprint.Weight}} weight</p>
 
         </ion-card-content>
 
@@ -67,19 +63,19 @@
 
     </ion-row>
   </ion-grid>
--->
-  <div *ngIf="currentSprint != null">
+
+  <!-- <div *ngIf="currentSprint != null">
     <p>Current Sprint</p>
     <p>Start: {{currentSprint.StartDate}}</p>
     <p>End: {{currentSprint.EndDate}}</p>
     <p>Upcoming</p>
     <ion-list>
       <ion-item *ngFor="let task of currentSprintTasks">
-        <p>Description: {{task.Description}} Size: {{task.Size}}</p>
+        <p>{{task.User}}: {{task.Description}} Size: {{task.Size}}</p>
       </ion-item>
     </ion-list>
-  </div>
-  <ion-list>
+  </div> -->
+  <!-- <ion-list>
     <ion-item *ngFor="let sprint of inactiveSprints">
       <p>Start: {{sprint.StartDate}}</p>
       <p>End: {{sprint.EndDate}}</p>
@@ -90,4 +86,4 @@
       <p>Tasks Completed: {{sprint.CompletedTasks}}</p>
     </ion-item>
   </ion-list>
-</ion-content>
+</ion-content> -->

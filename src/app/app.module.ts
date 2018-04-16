@@ -21,6 +21,7 @@ import firebase from "firebase";
 import { ClientsProvider } from '../providers/clients/clients';
 import { SprintsProvider } from '../providers/sprints/sprints';
 import { TasksProvider } from '../providers/tasks/tasks';
+import { PlannersProvider } from '../providers/planners/planners';
 //import { credentials } from './config';
 
 var credentials = {
@@ -67,7 +68,8 @@ firebase.initializeApp(credentials);
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ClientsProvider,
     SprintsProvider,
-    TasksProvider
+    TasksProvider,
+    PlannersProvider
   ]
 })
 export class AppModule {}

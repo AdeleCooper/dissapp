@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import 'firebase/firestore';
 import { SprintsProvider} from '../../providers/sprints/sprints';
 import { TasksProvider } from '../../providers/tasks/tasks';
+import { ClientsProvider } from '../../providers/clients/clients';
 
 /**
  * Generated class for the SprintsPage page.
