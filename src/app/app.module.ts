@@ -23,6 +23,7 @@ import { ClientsProvider } from '../providers/clients/clients';
 import { SprintsProvider } from '../providers/sprints/sprints';
 import { TasksProvider } from '../providers/tasks/tasks';
 import { PlannersProvider } from '../providers/planners/planners';
+import { SprintCollectionsProvider } from '../providers/sprint-collections/sprint-collections';
 //import { credentials } from './config';
 
 var credentials = {
@@ -72,7 +73,8 @@ firebase.initializeApp(credentials);
     ClientsProvider,
     SprintsProvider,
     TasksProvider,
-    PlannersProvider
+    PlannersProvider,
+    SprintCollectionsProvider
   ]
 })
 export class AppModule {}

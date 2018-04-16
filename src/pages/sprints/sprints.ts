@@ -42,6 +42,7 @@ export class SprintsPage {
   }
 
   getSprints() {
+    console.log("inside get sprints");
     // TODO: The collection id can be supplied as a param to this function when the login page switches to this page
     this.inactiveSprints = [];
     this.currentSprint = null;
@@ -93,7 +94,9 @@ export class SprintsPage {
     var self = this;
 
     modal.onDidDismiss(data => {
-      console.log('add sprint data: ' + JSON.stringify(data));
+      //console.log('add sprint data: ' + JSON.stringify(data));
+      self.sprintsService.addSprint(data);
+      self.getSprints();
       // TODO - call provider to update the database with new data
       // TODO - then try calling self.getSprints to re-fetch all sprints and update UI
     });

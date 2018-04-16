@@ -11,10 +11,11 @@ import 'firebase/firestore';
 @Injectable()
 export class SprintsProvider {
   name: string;
-  db:any;
+  db: any;
+  sprint: any;
 
   constructor() {
-    this.db = firebase.firestore();    
+    this.db = firebase.firestore();
   }
 
   getSprintCollection(collectionId): Promise<any> {
@@ -59,5 +60,22 @@ export class SprintsProvider {
           reject(error);
         });
     });
-  }  
+  }
+
+  addSprint(data) {
+    JSON.stringify(data);
+    this.db.collection("Sprints").add(data
+    ).then(function(docRef) {
+      console.log("Document written with ID: ", docRef.id);
+  }).catch((error: any) => {
+      console.log('rejecting due to error: ' + error);
+    });
+    //needs to return the new sprint ID so it can be added to the sprint collection 
+
+
+
+  }
+
+
+
 }
