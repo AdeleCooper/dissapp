@@ -92,7 +92,7 @@ export class SprintsPage {
     var self = this;
 
     modal.onDidDismiss(data => {
-      if (data = {}){
+      if (data.title == null){
         console.log("exit");
       }else {
         self.sprintsService.addSprint(data).then((doc) => {

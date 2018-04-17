@@ -17,6 +17,7 @@ import { SprintFormPage } from '../pages/sprint-form/sprint-form';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { DatePickerModule } from 'ion-datepicker';
 
 import firebase from "firebase";
 import { ClientsProvider } from '../providers/clients/clients';
@@ -53,7 +54,8 @@ firebase.initializeApp(credentials);
     //AngularFireModule.initializeApp(credentials.firebase),
     AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    DatePickerModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

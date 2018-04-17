@@ -24,9 +24,17 @@
     
   </ion-toolbar>
 </ion-header>
-
+<!-- TODO: change ngModels to what sprint should be - look up drop downs change database fields to match names -->
 <ion-content padding>
   <form (ngSubmit)="addSprint()">
+      <ion-item>
+          <ion-label>Start Date</ion-label>
+          <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="sprint.startDate" name="startdate" ></ion-datetime>
+        </ion-item>
+        <ion-item>
+            <ion-label>End Date</ion-label>
+            <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="sprint.endDate" name="enddate" ></ion-datetime>
+          </ion-item>
     <ion-item>
       <ion-label>Sprint Title</ion-label>
       <ion-input type="text" [(ngModel)]="sprint.title" name="title"></ion-input>
