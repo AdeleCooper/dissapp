@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 //import firebase from 'firebase';
 import 'firebase/firestore';
-import { SprintsProvider} from '../../providers/sprints/sprints';
+import { SprintsProvider } from '../../providers/sprints/sprints';
 import { TasksProvider } from '../../providers/tasks/tasks';
 import { ClientsProvider } from '../../providers/clients/clients';
 import { SprintFormPage } from '../sprint-form/sprint-form';
@@ -26,8 +26,8 @@ export class SprintsPage {
   public sprintIds: any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public modalCtrl: ModalController,
-              public sprintsService: SprintsProvider, public tasksService: TasksProvider) {
+    public modalCtrl: ModalController,
+    public sprintsService: SprintsProvider, public tasksService: TasksProvider) {
     console.log('SprintsPage constructor');
     this.getSprints();
   }
@@ -49,8 +49,7 @@ export class SprintsPage {
     this.currentSprintTasks = [];
     var self = this;
 
-    this.sprintsService.getSprintCollection('9uovgQw0zVKFdMyMJXNz').then((doc) =>
-    {
+    this.sprintsService.getSprintCollection('9uovgQw0zVKFdMyMJXNz').then((doc) => {
       if (doc) {
         //var x = doc.data();
         self.sprintIds = doc.data().Sprints;
@@ -75,19 +74,18 @@ export class SprintsPage {
               }
             } else {
               self.inactiveSprints.push(sprint);
+              console.log(self.inactiveSprints);
             }
           });
         });
       }
     })
-    .catch((error: any) =>
-    {
-      console.error("getSprints - error received: " + error);
-    });
+      .catch((error: any) => {
+        console.error("getSprints - error received: " + error);
+      });
   }
 
-  addSprintClicked() : void
-  {
+  addSprintClicked(): void {
     console.log("addSprintClicked");
     let modal = this.modalCtrl.create(SprintFormPage);
 
@@ -95,9 +93,11 @@ export class SprintsPage {
 
     modal.onDidDismiss(data => {
       //console.log('add sprint data: ' + JSON.stringify(data));
-      self.sprintsService.addSprint(data);
-      self.getSprints();
-      // TODO - call provider to update the database with new data
+      self.sprintsService.addSprint(data).then((doc) => {
+        self.getSprints();
+        console.log("inside .then")
+      }
+      );
       // TODO - then try calling self.getSprints to re-fetch all sprints and update UI
     });
     modal.present();
