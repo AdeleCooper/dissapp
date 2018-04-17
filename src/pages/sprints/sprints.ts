@@ -92,12 +92,21 @@ export class SprintsPage {
     var self = this;
 
     modal.onDidDismiss(data => {
+      if (data = {}){
+        console.log("exit");
+      }else {
+        self.sprintsService.addSprint(data).then((doc) => {
+          self.getSprints();
+          console.log("inside .then")
+        }
+        );}
+        
       //console.log('add sprint data: ' + JSON.stringify(data));
-      self.sprintsService.addSprint(data).then((doc) => {
-        self.getSprints();
-        console.log("inside .then")
-      }
-      );
+      // self.sprintsService.addSprint(data).then((doc) => {
+      //   self.getSprints();
+      //   console.log("inside .then")
+      // }
+      // );
       // TODO - then try calling self.getSprints to re-fetch all sprints and update UI
     });
     modal.present();

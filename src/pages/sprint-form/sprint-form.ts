@@ -28,4 +28,9 @@ export class SprintFormPage {
 
     this.viewCtrl.dismiss(this.sprint);
   }
+
+  dismiss() {
+    console.log(this.sprint);
+    this.viewCtrl.dismiss(this.sprint);
+  }
 }
