@@ -84,7 +84,7 @@ export class SprintsProvider {
             self.sprintIds = doc.data().Sprints;
             console.log(self.sprintIds);
             // change .push to "docRef.id"
-            self.sprintIds.push("W4qnMIccMnSnaB7alf5t");
+            self.sprintIds.push(docRef.id);
             console.log(self.sprintIds);
           }
         self.sprintCollectionsService.updateSprintCollection('9uovgQw0zVKFdMyMJXNz',self.sprintIds);

@@ -40,7 +40,6 @@ export class SprintCollectionsProvider {
   }
 
 
-
   updateSprintCollection(docID, sprintsArray) {
     this.db.collection("SprintCollections").doc(docID).update({ Sprints: sprintsArray })
       .catch((error: any) => {

@@ -12,48 +12,48 @@
       </button> -->
     </ion-title>
     <ion-buttons start>
-        <button ion-button color="dark" (click)="dismiss()"> 
-          <span ion-text color="primary" showWhen="ios">Cancel</span>
-          <ion-icon name="md-close" showWhen="android, windows"></ion-icon>
-        </button>
-      </ion-buttons>
+      <button ion-button color="dark" (click)="dismiss()">
+        <span ion-text color="primary" showWhen="ios">Cancel</span>
+        <ion-icon name="md-close" showWhen="android, windows"></ion-icon>
+      </button>
+    </ion-buttons>
     <!-- <ion-button end>
       <button ion-button></button>
     </ion-button> -->
     <!-- <button ion-button round color="dark" type="exit" block>X</button> -->
-    
+
   </ion-toolbar>
 </ion-header>
 <!-- TODO: change ngModels to what sprint should be - look up drop downs change database fields to match names -->
 <ion-content padding>
   <form (ngSubmit)="addSprint()">
-      <ion-item>
-          <ion-label>Start Date</ion-label>
-          <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="sprint.startDate" name="startdate" ></ion-datetime>
-        </ion-item>
-        <ion-item>
-            <ion-label>End Date</ion-label>
-            <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="sprint.endDate" name="enddate" ></ion-datetime>
-          </ion-item>
     <ion-item>
       <ion-label>Sprint Title</ion-label>
-      <ion-input type="text" [(ngModel)]="sprint.title" name="title"></ion-input>
+      <ion-input type="text" [(ngModel)]="sprint.Title" name="Title"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Sprint Description</ion-label>
-      <ion-textarea [(ngModel)]="sprint.description" name="description"></ion-textarea>
+      <ion-label>Start Date</ion-label>
+      <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="sprint.StartDate" name="StartDate"></ion-datetime>
     </ion-item>
     <ion-item>
-      <ion-label>Sprint Owner (user)</ion-label>
-      <ion-textarea [(ngModel)]="sprint.user" name="user"></ion-textarea>
+      <ion-label>End Date</ion-label>
+      <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="sprint.EndDate" name="EndDate"></ion-datetime>
     </ion-item>
     <ion-item>
-      <ion-label>Sprint Size</ion-label>
-      <ion-textarea [(ngModel)]="sprint.size" name="size"></ion-textarea>
+      <ion-label>Notes</ion-label>
+      <ion-textarea [(ngModel)]="sprint.Notes" name="Notes"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label>Completed tasks</ion-label>
+      <ion-textarea [(ngModel)]="sprint.CompletedTasks" name="CompletedTasks"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label>Status</ion-label>
+      <ion-textarea [(ngModel)]="sprint.Status" name="Status"></ion-textarea>
     </ion-item>
     <ion-item>
       <ion-label>Sprint Weight</ion-label>
-      <ion-textarea [(ngModel)]="sprint.weight" name="weight"></ion-textarea>
+      <ion-textarea [(ngModel)]="sprint.Weight" name="Weight"></ion-textarea>
     </ion-item>
     <button ion-button type="submit" block>Add Sprint</button>
   </form>
