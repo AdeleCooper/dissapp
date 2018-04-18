@@ -1,15 +1,19 @@
+<div class="background_fullscreen" style="background-image: url('assets/imgs/bg1.jpg');"></div>
 <ion-header>
   <ion-navbar>
+    <ion-title>
+      Client Sign Up
+    </ion-title>
+    <!-- Testing only, remove start here -->
     <button ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>
-      Sign Up
-    </ion-title>
+    <!-- Remove end here -->
     <ion-buttons end>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
+
 <div style="height: 100vh; width: 100%; padding-top: 10vh;">
   <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
     <div style="height: 26vh; display: flex; justify-content: center;">

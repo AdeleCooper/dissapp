@@ -80,9 +80,26 @@ $colors: (
 
 @import "ionic.ionicons";
 
-
 // Fonts
 // --------------------------------------------------
 
-@import "roboto";
-@import "noto-sans";
+// @import "roboto";
+// @import "noto-sans";
+// $font-family-base: 'Raleway', sans-serif !default;
+$font-family-md-base: 'Raleway', sans-serif !default;
+$font-family-ios-base: 'Raleway', sans-serif !default;
+$font-family-wp-base: 'Raleway', sans-serif !default;
+
+
+// Overrides
+
+$text-input-placeholder-color:(#EEE);
+$text-input-highlight-color-valid:(#fff);
+$toolbar-background:(transparent);
+$toolbar-border-color:(transparent);
+
+// iOS Specific
+
+$toolbar-ios-border-color:(transparent);
+$toolbar-ios-height:10vh;
+$toolbar-ios-title-font-size:2em;

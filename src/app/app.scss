@@ -19,6 +19,7 @@
 
 body {
     color: #cccccc;
+    background-color: white;
 }
 
 .background_fullscreen {
@@ -27,23 +28,34 @@ body {
     left: 0;
     height: 100vh;
     width: 100%;
-    background-image: url('/assets/imgs/bg1.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
     background-size: cover;
     opacity: 0.8;
-    background-color: #ffa3da;
     z-index: -1;
 }
 
-.background_scale {
+.background_top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 50vh;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    opacity: 0.8;
+    z-index: -1;
+}
+
+.background_scaled {
     position: fixed;
     top: 0;
     left: 0;
     height: 100vh;
     width: 100%;
-    background-image: url('/assets/imgs/bg3.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
@@ -51,22 +63,29 @@ body {
     z-index: -1;
 }
 
-.background_onboarding {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100%;
-    background-image: url('/assets/imgs/bg2.jpg');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    background-size: cover;
-    opacity: 0.8;
-    background-color: #ffa3da;
-    z-index: -1;
+a {
+    color: grey;
 }
 
-a {
-    color: white;
+.vertical-align-content > *
+{
+     display: flex!important;
+     align-content: center!important;
+     align-items: center!important;
+     justify-content: center!important;
+}
+
+ion-navbar button ion-icon{
+    color: grey;
+}
+
+ion-navbar.greytool {
+    box-shadow: 5px 5px 20px #bbb;
+}
+
+
+
+.toolbar-title-ios {
+    color:grey;
+    font-size: medium;
 }

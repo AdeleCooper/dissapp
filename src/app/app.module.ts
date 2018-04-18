@@ -76,7 +76,8 @@ firebase.initializeApp(credentials);
     SprintsProvider,
     TasksProvider,
     PlannersProvider,
-    SprintCollectionsProvider
+    SprintCollectionsProvider,
+    TasksProvider
   ]
 })
 export class AppModule {}

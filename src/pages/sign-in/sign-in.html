@@ -1,4 +1,4 @@
-<div class="background"></div>
+<div class="background_fullscreen" style="background-image: url('/assets/imgs/bg1.jpg');"></div>
 <ion-header>
   <ion-navbar>
     <button ion-button icon-only menuToggle>
@@ -11,38 +11,30 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-<ion-content class="background_fullscreen">
-  <div style="height: 100vh; width: 100%; padding-top: 10vh;">
-    <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
-      <div style="height: 30vh; display: flex; justify-content: center;">
-        <div style="text-align: center;">
-          <ion-icon name="paper-plane-outline" style="font-size: 8rem; color: white;"></ion-icon>
-        </div>
+<div style="height: 100vh; width: 100%; padding-top: 10vh;">
+  <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
+    <div style="height: 30vh; display: flex; justify-content: center;">
+      <div style="text-align: center;">
+        <ion-icon name="paper-plane-outline" style="font-size: 8rem; color: white;"></ion-icon>
       </div>
-      <ion-row style="height: calc(90vh - 30vh - 30vh); display: flex; align-items: center;">
-        <ion-col style="padding: 5vw; width: 100vw;">
-          <ion-list inset>
-            <ion-item style="background-color: transparent;">
-              <ion-label>
-                <ion-icon name="contact" style="color: white;"></ion-icon>
-              </ion-label>
-              <ion-input placeholder="User Name" name="username" id="loginField" type="text" required [(ngModel)]="username" #email style="color: white;"></ion-input>
-            </ion-item>
-            <ion-item style="background-color: transparent;">
-              <ion-label>
-                <ion-icon name="key" style="color: white;"></ion-icon>
-              </ion-label>
-              <ion-input placeholder="Password" name="password" id="passwordField" type="password" required [(ngModel)]="password" style="color: white;"></ion-input>
-            </ion-item>
-          </ion-list>
-        </ion-col>
-      </ion-row>
-      <div style="height: 30vh; width: 100%; display: flex; position: fixed; bottom: 0; justify-content: flex-end; flex-direction: column; padding: 4vw;">
-        <button ion-button class="submit-btn" full type="submit" [disabled]="!loginForm.form.valid" style="background-color: #ffa3da;">Sign In</button>
-        <p style="text-align: center; padding-top: 1vh; margin-bottom: 3vh;">Don't have an account?
-          <a href="#">Sign up</a>
-        </p>
-      </div>
-    </form>
-  </div>
-</ion-content>
+    </div>
+    <ion-row style="height: calc(90vh - 30vh - 30vh); display: flex; align-items: center;">
+      <ion-col style="padding: 5vw; width: 100vw;">
+        <ion-list inset>
+          <ion-item style="background-color: transparent;"> 
+            <ion-label><ion-icon name="contact" style="color: white;"></ion-icon></ion-label>
+            <ion-input placeholder="User Name" name="username" id="loginField" type="text" required [(ngModel)]="username" #email style="color: white;"></ion-input>
+          </ion-item>
+          <ion-item style="background-color: transparent;">
+            <ion-label><ion-icon name="key" style="color: white;"></ion-icon></ion-label>
+            <ion-input placeholder="Password" name="password" id="passwordField" type="password" required [(ngModel)]="password" style="color: white;"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <div style="height: 30vh; width: 100%; display: flex; position: fixed; bottom: 0; justify-content: flex-end; flex-direction: column; padding: 4vw;">
+      <button ion-button class="submit-btn" full type="submit" [disabled]="!loginForm.form.valid" style="background-color: #ffa3da;">Sign In</button>
+      <p style="text-align: center; padding-top: 1vh; margin-bottom: 3vh;">Don't have an account? <a href="#">Sign up</a></p>
+    </div>
+  </form>
+</div>
