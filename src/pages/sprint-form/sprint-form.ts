@@ -16,7 +16,9 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
   templateUrl: 'sprint-form.html',
 })
 export class SprintFormPage {
-  sprint = {}
+  sprint = {
+    Tasks: []
+  }
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
   }
 

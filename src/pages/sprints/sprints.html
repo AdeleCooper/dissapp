@@ -12,8 +12,9 @@
     <ion-title class="greytitle">
       Sprints
     </ion-title>
-    <ion-buttons end> 
-      <button (click)="addSprintClicked()"><ion-icon name="add"></ion-icon>  New Sprint</button>
+    <ion-buttons end>
+      <button (click)="addSprintClicked()">
+        <ion-icon name="add"></ion-icon> New Sprint</button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -23,11 +24,11 @@
 
     <ion-row>
 
-      <ion-card class="currentSprintCard" *ngIf="currentSprint != null">
+      <ion-card (click)="showCurrentSprintClicked()" class="currentSprintCard" *ngIf="currentSprint != null">
 
         <ion-card-header>
           <p>
-            <strong>Current Sprint</strong> 
+            <strong>Current Sprint</strong>
           </p>
           <p class="headerDates"> {{currentSprint.Title}}: {{currentSprint.StartDate}} - {{currentSprint.EndDate}}</p>
         </ion-card-header>
@@ -45,11 +46,11 @@
     </ion-row>
 
     <ion-row>
-
-      <ion-card *ngFor="let sprint of inactiveSprints">
-
+      <ion-card *ngFor="let sprint of inactiveSprints;let i=index" (click)="showSprintClicked(sprint,i)">
         <ion-card-header>
-            {{sprint.Title}} 
+          {{sprint.Title}}
+          <ion-icon name="trash"></ion-icon>
+        
         </ion-card-header>
 
         <ion-card-content>
@@ -59,16 +60,14 @@
           <p>{{sprint.Weight}} weight</p>
 
         </ion-card-content>
-
       </ion-card>
-
     </ion-row>
     <!-- <ion-row>
       <button (click)="addSprintClicked()">Add New Sprint</button>
     </ion-row> -->
   </ion-grid>
 
-    <!-- <div *ngIf="currentSprint != null">
+  <!-- <div *ngIf="currentSprint != null">
     <p>Current Sprint</p>
     <p>Start: {{currentSprint.StartDate}}</p>
     <p>End: {{currentSprint.EndDate}}</p>

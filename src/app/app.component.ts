@@ -9,6 +9,8 @@ import { SignInPage } from '../pages/sign-in/sign-in';
 import { SignUpPage } from '../pages/sign-up/sign-up';
 import { SignUpOnboardingPage } from '../pages/sign-up-onboarding/sign-up-onboarding';
 import { SprintsPage } from '../pages/sprints/Sprints';
+import { CurrentSprintPage } from '../pages/current-sprint/current-sprint';
+import { TasksPage } from '../pages/tasks/tasks';
 
 @Component({
   templateUrl: 'app.html'

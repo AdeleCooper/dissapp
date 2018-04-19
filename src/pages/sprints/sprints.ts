@@ -6,6 +6,7 @@ import { SprintsProvider } from '../../providers/sprints/sprints';
 import { TasksProvider } from '../../providers/tasks/tasks';
 import { ClientsProvider } from '../../providers/clients/clients';
 import { SprintFormPage } from '../sprint-form/sprint-form';
+import { CurrentSprintPage } from '../current-sprint/current-sprint';
 
 /**
  * Generated class for the SprintsPage page.
@@ -111,4 +112,21 @@ export class SprintsPage {
     });
     modal.present();
   }
+  showCurrentSprintClicked() : void
+  {
+     //this.navCtrl.push('SprintsPage');
+     this.navCtrl.push(CurrentSprintPage, this.currentSprint);
+  }  
+
+  showSprintClicked(sprint,i) : void {
+    //console.log(sprint);
+    var sprintID = this.sprintIds[i];
+    
+    sprint.id = this.sprintIds[i];
+    console.log(sprint.id);
+    this.navCtrl.push(CurrentSprintPage, sprint);
+  }
+  
+
+
 }

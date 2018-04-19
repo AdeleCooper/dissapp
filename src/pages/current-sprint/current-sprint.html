@@ -7,12 +7,42 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>current-sprint</ion-title>
+    <ion-title>Current Sprint</ion-title> 
+    <ion-buttons end>
+        <button>
+          <ion-icon name="settings"></ion-icon> Edit Sprint</button>
+      </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
+  <ion-grid style="padding: 0px;">
 
+    <ion-row (click) = "viewCompletedTasks()">
+      <ion-item-divider detail-push>Completed Tasks</ion-item-divider>
+
+      <div *ngFor="let comptask of completedTasks; let i=index">
+        <ion-item no-lines text-wrap *ngIf="i<3">
+          <p item-start>-</p>
+          <strong>{{comptask.Description}}</strong>
+          <p item-end>{{comptask.User}}</p>
+        </ion-item>
+      </div>
+
+    </ion-row>
+
+    <ion-row (click) = "viewTasks()">
+
+      <ion-item-divider detail-push>Outstanding Tasks</ion-item-divider>
+
+      <div *ngFor="let task of otherTasks; let i=index">
+        <ion-item no-lines text-wrap *ngIf="i<3">
+          <p item-start>-</p>
+          <strong>{{task.Description}}</strong>
+          <p item-end>{{task.User}}</p>
+        </ion-item>
+      </div>
+    </ion-row>
+  </ion-grid>
 </ion-content>
