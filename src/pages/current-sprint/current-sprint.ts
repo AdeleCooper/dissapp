@@ -20,7 +20,7 @@ export class CurrentSprintPage {
   otherTasks: any = [];
   completedTasks: any = [];
   currentSprint: any;
-
+  sprintid:any;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public tasksService: TasksProvider) {
@@ -36,6 +36,7 @@ export class CurrentSprintPage {
       Weight: this.navParams.get('Weight'),
       ID: this.navParams.get('id')
     };
+    this.sprintid = this.navParams.get('id');
   console.log(this.taskIds);
     this.getTasks();
   }
@@ -79,7 +80,8 @@ export class CurrentSprintPage {
   viewTasks(){
     var data = {
       Title: "Outstanding Tasks",
-      Tasks: this.otherTasks
+      Tasks: this.otherTasks,
+      SprintId: this.sprintid
     }
     this.navCtrl.push(TasksPage, data);
   }

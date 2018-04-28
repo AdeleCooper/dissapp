@@ -64,79 +64,79 @@ export class TasksProvider {
     });
 
   }  
-  editTask(taskId, data): Promise<any> {
-    return new Promise((resolve, reject) => {
-      JSON.stringify(data);
-      console.log(data);
+  editTask(taskId, data){
+    // return new Promise((resolve, reject) => {
+      console.log(data.id);
       this.db
         .collection("Tasks")
-        .doc(taskId)
+        .doc(data.id)
         .set(data)
-        .then((doc: any) => {
-          if (doc.exists) {
-            //console.log('resolving');
-            resolve(doc);
-          } else {
-            //console.log('rejecting due to non-existent doc');
-            reject("Task doesn't exist");
-          }
-        })
+        // .then((doc: any) => {
+        //   if (doc.exists) {
+        //     //console.log('resolving');
+        //     resolve(doc);
+        //   } else {
+        //     //console.log('rejecting due to non-existent doc');
+        //     reject("Task doesn't exist");
+        //   }
+        // })
         .catch((error: any) => {
           console.log('rejecting due to error: ' + error);
-          reject(error);
+          //reject(error);
         });
-    });
+    // });
   }
   deleteTask(taskId, sprintid, tasks): Promise<any> {
     return new Promise((resolve, reject) => {
-      var self =this;
+      var self = this;
+      var newtasks = [];
+      var taskstoreturn = [];
       this.db
         .collection("Tasks")
         .doc(taskId)
         .delete()
         .then((doc: any) => {
-          // CHECK CORRECT SYNTAX
-          tasks.pop(taskId);
-          self.sprintsService.updateTasks(sprintid,tasks);
-          if (doc.exists) {
-            //console.log('resolving');
-            resolve(doc);
-          } else {
-            //console.log('rejecting due to non-existent doc');
-            reject("Task doesn't exist");
-          }
+          tasks.forEach(element => {
+            if (element.id == taskId){
+              console.log("found task to delete");
+            }else {
+              taskstoreturn.push(element.id);
+            }
+            resolve(taskstoreturn);
+          });
+          //tasks.pop(taskId);
         })
         .catch((error: any) => {
           console.log('rejecting due to error: ' + error);
           reject(error);
         });
-    });
+      });
   }    
-  moveTask(taskId, sprintid): Promise<any> {
+  // moveTask(taskId, sprintid): Promise<any> {
 
-    //need to get tasks from new sprint!! maybe remove??
-    //will need to get list of all sprint ids to choose from a drop down menu
+  //   //need to get tasks from new sprint!! maybe remove??
+  //   //will need to get list of all sprint ids to choose from a drop down menu
     
-    return new Promise((resolve, reject) => {
-      this.db
-        .collection("Tasks")
-        .doc(taskId)
-        .get()
-        .then((doc: any) => {
-          if (doc.exists) {
-            //console.log('resolving');
-            resolve(doc);
-          } else {
-            //console.log('rejecting due to non-existent doc');
-            reject("Task doesn't exist");
-          }
-        })
-        .catch((error: any) => {
-          console.log('rejecting due to error: ' + error);
-          reject(error);
-        });
-    });
-  }  
+  //   return new Promise((resolve, reject) => {
+  //     this.db
+  //       .collection("Tasks")
+  //       .doc(taskId)
+  //       .get()
+  //       .then((doc: any) => {
+  //         if (doc.exists) {
+  //           //console.log('resolving');
+  //           resolve(doc);
+  //         } else {
+  //           //console.log('rejecting due to non-existent doc');
+  //           reject("Task doesn't exist");
+  //         }
+  //       })
+  //       .catch((error: any) => {
+  //         console.log('rejecting due to error: ' + error);
+  //         reject(error);
+  //       });
+  //   });
+  // }  
 
 
 

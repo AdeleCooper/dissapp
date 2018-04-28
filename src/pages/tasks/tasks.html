@@ -25,9 +25,9 @@
             {{task.Description}}
           </ion-item>
           <ion-item-options side="right">
-            <button ion-button (click)="moveTask()" color ="secondary">Move <ion-icon name="archive"></ion-icon></button>
+            <!-- <button ion-button (click)="moveTask()" color ="secondary">Move <ion-icon name="archive"></ion-icon></button> -->
             <button ion-button (click)="editTask(task)" >Edit <ion-icon name="create"></ion-icon></button>
-            <button ion-button (click)="deleteTask()" color="danger">Delete <ion-icon name="trash"></ion-icon></button>
+            <button ion-button (click)="deleteTask(task)" color="danger">Delete <ion-icon name="trash"></ion-icon></button>
           </ion-item-options>
 
         </ion-item-sliding>
