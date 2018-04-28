@@ -58,6 +58,7 @@ export class SprintsPage {
         self.sprintIds.forEach(id => {
           self.sprintsService.getSprint(id).then((doc) => {
             var sprint = doc.data();
+            sprint.id = id;
             //var date = new Date(sprint.StartDate);
             sprint.StartDate = self.fixupDate(sprint.StartDate);//date.toLocaleDateString("en-GB");
             sprint.EndDate = self.fixupDate(sprint.EndDate);//date.toLocaleDateString("en-GB");

@@ -103,6 +103,37 @@ export class SprintsProvider {
     });
   }
 
+  updateTasks(data,sprintId){
+    this.db.collection("Sprints").doc(sprintId).update({ Tasks: data })
+    .catch((error: any) => {
+      console.error("getSprints - error received: " + error);
+    });
+
+  }
+
+  // getTasks(sprintId): Promise<any> {
+  //   return new Promise((resolve, reject) => {
+  //     this.db
+  //       .collection("Sprints")
+  //       .doc(sprintId)
+  //       .get("Tasks")
+  //       .then((doc: any) => {
+  //         if (doc.exists) {
+  //           //console.log('resolving');
+  //           resolve(doc);
+  //         } else {
+  //           //console.log('rejecting due to non-existent doc');
+  //           reject("collection doesn't exist");
+  //         }
+  //       })
+  //       .catch((error: any) => {
+  //         console.log('rejecting due to error: ' + error);
+  //         reject(error);
+  //       });
+  //   });
+    
+  // }
+
 }
 
 
