@@ -45,16 +45,17 @@ export class TasksPage {
       Description: "test"
     }
     console.log(task.id);
-    //this.tasksService.editTask(task.id, data);
+    this.tasksService.editTask(task.id, data);
   }
 
   addTask(){
     console.log("add");
     var data = {
-      name: "task test"
+      Description: "task test"
     }
     //return updated list of tasks and repopulate so that page updates 
     this.tasksService.addTask(data, "SoOvvBrscRTc7EFaulsn", this.tasks);
+    this.tasks.push(data);
   }
 }
 // add/delete/move/edit tasks
