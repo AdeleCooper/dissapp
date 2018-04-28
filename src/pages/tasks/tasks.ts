@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { TasksProvider } from '../../providers/tasks/tasks';
 import { SprintsProvider } from '../../providers/sprints/sprints';
 
@@ -20,7 +20,8 @@ export class TasksPage {
   tasks: any = [];
   sprintid: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public tasksService: TasksProvider, public sprintsService: SprintsProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public tasksService: TasksProvider,
+    public sprintsService: SprintsProvider, public events: Events) {
     this.pageTitle = this.navParams.get('Title');
     this.tasks = this.navParams.get('Tasks');
     this.sprintid = this.navParams.get('SprintId');
@@ -31,29 +32,41 @@ export class TasksPage {
     //console.log(this.tasks[0].Description);
   }
 
-  deleteTask(task){
-  console.log("delete");
-  var self = this;
-  this.tasksService.deleteTask(task.id, this.sprintid, this.tasks).then((remainingTasks)=>{
-    var temp = [];
-    self.tasks.forEach(element => {
-      if (element == task){
-        console.log("found taks to delete");
-      }else {
-        temp.push(element);
+  deleteTask(task) {
+    console.log("delete");
+    var self = this;
+    this.tasksService.deleteTask(task.id, this.sprintid, this.tasks).then((remainingTasks) => {
+      var temp = [];
+      for (var i = 0; i < self.tasks.length; i++) {
+        if (self.tasks[i].id == task.id) {
+          self.tasks.splice(i, 1);
+          break;
+        }
       }
+      // self.tasks.forEach(element => {
+      //   if (element == task) {
+      //     console.log("found task to delete");
+      //   } else {
+      //     temp.push(element);
+      //   }
+      // });
+      // self.tasks = temp;
+      self.sprintsService.updateTasks(remainingTasks, self.sprintid);
+
+      var data = {
+        title: this.pageTitle,
+        tasks: self.tasks
+      }
+      //this.events.publish('tasks:changed', data);
     });
-    self.tasks = temp;
-    self.sprintsService.updateTasks(remainingTasks, self.sprintid);
-  });
-  //this.tasksService.deleteTask();
+    //this.tasksService.deleteTask();
   }
 
   // moveTask(){
   //   console.log("move");
   // }
 
-  editTask(task){
+  editTask(task) {
     console.log("edit");
     var data = {
       Description: "task test",
@@ -68,7 +81,7 @@ export class TasksPage {
     this.tasksService.editTask(task.id, data);
   }
 
-  addTask(){
+  addTask() {
     console.log("add");
     var self = this;
     var data = {
@@ -78,7 +91,7 @@ export class TasksPage {
       Size: "S",
       User: "Bea",
       UserID: "",
-      id:""
+      id: ""
     }
     //return updated list of tasks and repopulate so that page updates 
     this.tasksService.addTask(data, this.sprintid, this.tasks).then((doc) => {
@@ -86,9 +99,9 @@ export class TasksPage {
       console.log("new id:" + doc.id);
       self.tasks.push(data);
       console.log("after add" + self.tasks);
-      self.tasksService.editTask(data.id,data);
+      //self.tasksService.editTask(data.id, data);
     });
-    
+
   }
 }
 // add/delete/move/edit tasks

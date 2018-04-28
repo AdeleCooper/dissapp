@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { TasksProvider } from '../../providers/tasks/tasks';
 import { TasksPage } from '../tasks/tasks';
 
@@ -23,7 +23,7 @@ export class CurrentSprintPage {
   sprintid:any;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public tasksService: TasksProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public tasksService: TasksProvider, public events: Events) {
     this.taskIds = this.navParams.get('Tasks');
     this.currentSprint = {
       Title: this.navParams.get('Title'),
@@ -37,16 +37,23 @@ export class CurrentSprintPage {
       ID: this.navParams.get('id')
     };
     this.sprintid = this.navParams.get('id');
-  console.log(this.taskIds);
+    console.log(this.taskIds);
+    var self = this;
     this.getTasks();
+
+    // Subscribe to changes made to the list of tasks on the Tasks page
+    this.events.subscribe('tasks:changed', (data) => {
+      if (data.title == 'Completed Tasks') {
+        self.completedTasks = data.tasks;
+      } else if (data.title == 'Outstanding Tasks') {
+        self.otherTasks = data.tasks;
+      }
+    });
+    
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CurrentSprintPage');
-
-
-
-    
     console.log(this.currentSprint);
   }
 
