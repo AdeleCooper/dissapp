@@ -29,13 +29,15 @@
         <h1>{{taskCount}}</h1>
         <p>Tasks outstanding</p>
       </ion-col>
-      <ion-col style="border-left: 1px solid black; text-align: center; color: black;">
+      <ion-col (click)="clientsClicked()" style="border-left: 1px solid black; text-align: center; color: black;">
         <h1>{{clientNumber}}</h1>
         <p>Clients</p>
       </ion-col>
     </ion-row>
     <ion-row style="width: 100%; text-align: center; background-color: white;">
       <ion-col>
+          <progress value="42" max="100">
+            </progress>
         <p>PROGRESS BAR</p>
       </ion-col>
     </ion-row>

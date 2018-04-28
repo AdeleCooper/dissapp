@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import 'firebase/firestore';
+import { ClientsPage } from '../../pages/clients/clients';
 import { SprintsProvider } from '../../providers/sprints/sprints';
 import { TasksProvider } from '../../providers/tasks/tasks';
 import { ClientsProvider } from '../../providers/clients/clients';
@@ -25,6 +26,7 @@ export class PlannerHomePage {
   public activeTasks: any;
   public taskCount: number;
   public planner: any;
+  public clients: any = [];
   public name: any;
   public clientNumber: any;
 
@@ -69,13 +71,13 @@ export class PlannerHomePage {
     });
   }
 
-  //Swap out for planner!!!
   getPlannerInfo() {
     this.planner = null;
     var self = this;
     this.plannersService.getPlanner().then((doc) => {
       if (doc) {
         self.planner = doc.data();
+        self.clients = self.planner.Clients;
         console.log(self.planner.Name);
         self.name = self.planner.Name;
         self.clientNumber = self.planner.Clients.length;
@@ -86,11 +88,10 @@ export class PlannerHomePage {
     ).catch((error: any) => {
       console.error("getSprint - error received: " + error);
     });
-
-
-
-
   }
-
-
+  
+  clientsClicked() {
+    var data = { Clients: this.clients};
+    this.navCtrl.push(ClientsPage, data);
+  }
 }

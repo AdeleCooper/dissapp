@@ -11,6 +11,7 @@ import { SignUpOnboardingPage } from '../pages/sign-up-onboarding/sign-up-onboar
 import { SprintsPage } from '../pages/sprints/Sprints';
 import { CurrentSprintPage } from '../pages/current-sprint/current-sprint';
 import { TasksPage } from '../pages/tasks/tasks';
+import { ClientsPage } from '../pages/clients/clients';
 
 @Component({
   templateUrl: 'app.html'

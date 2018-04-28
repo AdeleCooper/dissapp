@@ -35,24 +35,18 @@ export class HomePage {
   };
   
   getData() {
-    this.myService.getClient().then((doc) =>
-    {
-      if (doc) {
-        this.clients = doc.data();
-        console.info("** name: " + this.clients.Name);
-        this.Name = this.clients.Name;
-      }
-    })
-    .catch((error: any) =>
-    {
-      console.error("error received: " + error);
-    });
-    // if (client) {
-    //   console.info('client name: ' + client.name);
-    // }
-    
-    //this.myService.addClient();
-    //this.myService.updateClient();
+    // this.myService.getClient().then((doc) =>
+    // {
+    //   if (doc) {
+    //     this.clients = doc.data();
+    //     console.info("** name: " + this.clients.Name);
+    //     this.Name = this.clients.Name;
+    //   }
+    // })
+    // .catch((error: any) =>
+    // {
+    //   console.error("error received: " + error);
+    // });
   }
 
   showSprintsClicked() : void

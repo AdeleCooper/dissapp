@@ -14,6 +14,7 @@ import { SprintsPage } from '../pages/sprints/Sprints';
 import { SprintFormPage } from '../pages/sprint-form/sprint-form';
 import { CurrentSprintPage } from '../pages/current-sprint/current-sprint';
 import { TasksPage } from '../pages/tasks/tasks';
+import { ClientsPage } from '../pages/clients/clients';
 
 //import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -51,7 +52,8 @@ firebase.initializeApp(credentials);
     SprintsPage,
     SprintFormPage,
     CurrentSprintPage,
-    TasksPage ],
+    TasksPage,
+    ClientsPage ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
@@ -72,7 +74,8 @@ firebase.initializeApp(credentials);
     SprintsPage,
     SprintFormPage,
     CurrentSprintPage,
-    TasksPage
+    TasksPage,
+    ClientsPage
   ],
   providers: [
     StatusBar,

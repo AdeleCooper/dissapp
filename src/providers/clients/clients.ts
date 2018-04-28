@@ -17,11 +17,12 @@ export class ClientsProvider {
     this.db = firebase.firestore();
   }
 
-  getClient(): Promise<any> {
+  getClient(clientId): Promise<any> {
     return new Promise((resolve, reject) => {
       this.db
         .collection("Clients")
-        .doc("KXLiOkFJOrDfrW7oVz3S")
+        //.doc("KXLiOkFJOrDfrW7oVz3S")
+        .doc(clientId)
         .get()
         .then((doc: any) => {
           if (doc.exists) {
