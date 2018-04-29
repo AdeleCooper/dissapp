@@ -66,7 +66,7 @@ export class PlannerHomePage {
               })
             });
           }
-          self.progressBarValue = (self.currentSprint.CompletedTasks/sprint.Tasks.length)*100;
+          self.progressBarValue = Math.round(self.currentSprint.CompletedTasks / sprint.Tasks.length * 100);
           console.log(self.currentSprint.CompletedTasks +"/"+sprint.Tasks.length + " = " + self.progressBarValue);
           (<HTMLInputElement>document.getElementById('progressbar')).value = self.progressBarValue;
         });
