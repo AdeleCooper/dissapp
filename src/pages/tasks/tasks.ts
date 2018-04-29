@@ -19,12 +19,14 @@ export class TasksPage {
   pageTitle: any;
   tasks: any = [];
   sprintid: any;
+  active: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public tasksService: TasksProvider,
     public sprintsService: SprintsProvider, public events: Events) {
     this.pageTitle = this.navParams.get('Title');
     this.tasks = this.navParams.get('Tasks');
     this.sprintid = this.navParams.get('SprintId');
+    this.active = this.navParams.get('Active');
   }
 
   ionViewDidLoad() {
@@ -36,7 +38,6 @@ export class TasksPage {
     console.log("delete");
     var self = this;
     this.tasksService.deleteTask(task.id, this.sprintid, this.tasks).then((remainingTasks) => {
-      var temp = [];
       for (var i = 0; i < self.tasks.length; i++) {
         if (self.tasks[i].id == task.id) {
           self.tasks.splice(i, 1);
@@ -54,9 +55,13 @@ export class TasksPage {
       self.sprintsService.updateTasks(remainingTasks, self.sprintid);
 
       var data = {
-        title: this.pageTitle,
         tasks: self.tasks
       }
+      if(self.active){
+        console.log("hewwooo delete");
+        self.events.publish('tasks:changed', data);
+      }
+      
       //this.events.publish('tasks:changed', data);
     });
     //this.tasksService.deleteTask();
@@ -99,7 +104,12 @@ export class TasksPage {
       console.log("new id:" + doc.id);
       self.tasks.push(data);
       console.log("after add" + self.tasks);
-      //self.tasksService.editTask(data.id, data);
+      //adds task id to task field
+      self.tasksService.editTask(data.id, data);
+      if(self.active){
+        console.log("hewwwooo");
+        self.events.publish('tasks:changed', data);
+      }
     });
 
   }

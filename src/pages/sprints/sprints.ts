@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, Events } from 'ionic-angular';
 //import firebase from 'firebase';
 import 'firebase/firestore';
 import { SprintsProvider } from '../../providers/sprints/sprints';
@@ -25,12 +25,20 @@ export class SprintsPage {
   public currentSprintTasks: any = [];
   public inactiveSprints: any = [];
   public sprintIds: any = [];
+  public otherSprintIds: any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public modalCtrl: ModalController,
-    public sprintsService: SprintsProvider, public tasksService: TasksProvider) {
+    public sprintsService: SprintsProvider, public tasksService: TasksProvider, public events: Events) {
     console.log('SprintsPage constructor');
     this.getSprints();
+    var self = this;
+
+    //NOT SUBSCRIBING! :(
+    this.events.subscribe('tasks:changed', (data) => {
+      self.currentSprintTasks = data.tasks;  
+      console.log("subscribe ps" + data.tasks);    
+   });
   }
 
   ionViewDidLoad() {
@@ -48,6 +56,7 @@ export class SprintsPage {
     this.inactiveSprints = [];
     this.currentSprint = null;
     this.currentSprintTasks = [];
+    this.otherSprintIds = [];
     var self = this;
 
     this.sprintsService.getSprintCollection('9uovgQw0zVKFdMyMJXNz').then((doc) => {
@@ -77,6 +86,7 @@ export class SprintsPage {
             } else {
               self.inactiveSprints.push(sprint);
               console.log(self.inactiveSprints);
+              self.otherSprintIds.push(id);
             }
           });
         });
@@ -115,16 +125,18 @@ export class SprintsPage {
   }
   showCurrentSprintClicked() : void
   {
+    console.log("showCurrentSprintClicked");
      //this.navCtrl.push('SprintsPage');
      this.navCtrl.push(CurrentSprintPage, this.currentSprint);
   }  
 
   showSprintClicked(sprint,i) : void {
     //console.log(sprint);
-    var sprintID = this.sprintIds[i];
+    console.log("showSprintClicked");
+    //var sprintID = this.otherSprintIds[i-1];
     
-    sprint.id = this.sprintIds[i];
-    console.log(sprint.id);
+    //sprint.id = this.otherSprintIds[i-1];
+    console.log(sprint.id + sprint);
     this.navCtrl.push(CurrentSprintPage, sprint);
   }
   

@@ -29,6 +29,7 @@ export class PlannerHomePage {
   public clients: any = [];
   public name: any;
   public clientNumber: any;
+  public progressBarValue: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public sprintsService: SprintsProvider, public tasksService: TasksProvider, public plannersService: PlannersProvider) {
     this.getCurrentSprint();
@@ -64,6 +65,9 @@ export class PlannerHomePage {
               })
             });
           }
+          self.progressBarValue = (self.currentSprint.CompletedTasks/sprint.Tasks.length)*100;
+          console.log(self.currentSprint.CompletedTasks +"/"+sprint.Tasks.length + " = " + self.progressBarValue);
+          (<HTMLInputElement>document.getElementById('progressbar')).value = self.progressBarValue;
         });
       }
     }).catch((error: any) => {

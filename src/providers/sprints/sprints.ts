@@ -17,7 +17,7 @@ export class SprintsProvider {
   SprintCollection: any;
   sprintIds: any;
   newSprintId: any;
-
+  active: any;
   constructor(public sprintCollectionsService: SprintCollectionsProvider) {
     this.db = firebase.firestore();
   }

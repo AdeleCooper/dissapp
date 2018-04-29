@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { TasksProvider } from '../../providers/tasks/tasks';
+import { SprintsProvider } from '../../providers/sprints/sprints';
 import { TasksPage } from '../tasks/tasks';
 
 /**
@@ -23,8 +24,8 @@ export class CurrentSprintPage {
   sprintid:any;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public tasksService: TasksProvider, public events: Events) {
-    this.taskIds = this.navParams.get('Tasks');
+  constructor(public navCtrl: NavController, public navParams: NavParams, public tasksService: TasksProvider, public sprintsService: SprintsProvider, public events: Events) {
+    //his.taskIds = this.navParams.get('Tasks');
     this.currentSprint = {
       Title: this.navParams.get('Title'),
       StartDate: this.navParams.get('StartDate'),
@@ -38,17 +39,18 @@ export class CurrentSprintPage {
     };
     this.sprintid = this.navParams.get('id');
     console.log(this.taskIds);
-    var self = this;
-    this.getTasks();
+    this.getTaskIds();
+    //var self = this;
+    //this.getTasks();
 
     // Subscribe to changes made to the list of tasks on the Tasks page
-    this.events.subscribe('tasks:changed', (data) => {
-      if (data.title == 'Completed Tasks') {
-        self.completedTasks = data.tasks;
-      } else if (data.title == 'Outstanding Tasks') {
-        self.otherTasks = data.tasks;
-      }
-    });
+    // this.events.subscribe('tasks:changed', (data) => {
+    //   if (data.title == 'Completed Tasks') {
+    //     self.completedTasks = data.tasks;
+    //   } else if (data.title == 'Outstanding Tasks') {
+    //     self.otherTasks = data.tasks;
+    //   }
+    // });
     
   }
 
@@ -56,6 +58,16 @@ export class CurrentSprintPage {
     console.log('ionViewDidLoad CurrentSprintPage');
     console.log(this.currentSprint);
   }
+
+  getTaskIds(){
+    var self = this;
+    this.sprintsService.getSprint(this.sprintid).then((doc) => {
+      var sprint = doc.data();
+      this.taskIds = sprint.Tasks;
+      self.getTasks();
+    })
+  }
+
 
   getTasks() {
     var self = this;
@@ -79,7 +91,9 @@ export class CurrentSprintPage {
   viewCompletedTasks(){
     var data = {
       Title: "Completed Tasks",
-      Tasks: this.completedTasks
+      Tasks: this.completedTasks,
+      Active: this.currentSprint.Active,
+      SprintId: this.sprintid,
     }
     this.navCtrl.push(TasksPage, data);
   }
@@ -88,7 +102,8 @@ export class CurrentSprintPage {
     var data = {
       Title: "Outstanding Tasks",
       Tasks: this.otherTasks,
-      SprintId: this.sprintid
+      SprintId: this.sprintid,
+      Active: this.currentSprint.Active
     }
     this.navCtrl.push(TasksPage, data);
   }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ClientsProvider } from '../../providers/clients/clients';
+import { ClientTasksPage } from '../client-tasks/client-tasks';
 
 /**
  * Generated class for the ClientsPage page.
@@ -35,6 +36,19 @@ export class ClientsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ClientsPage');
+  }
+
+  clientClicked(client,i){
+    var data = { 
+      Client: client,
+      Id: this.clientIds[i]
+    };
+    this.navCtrl.push(ClientTasksPage, data);
+
+  }
+
+  addClient(){
+    console.log("add client");
   }
 
 }

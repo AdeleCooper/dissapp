@@ -12,6 +12,7 @@ import { SprintsPage } from '../pages/sprints/Sprints';
 import { CurrentSprintPage } from '../pages/current-sprint/current-sprint';
 import { TasksPage } from '../pages/tasks/tasks';
 import { ClientsPage } from '../pages/clients/clients';
+import { ClientTasksPage } from '../pages/client-tasks/client-tasks';
 
 @Component({
   templateUrl: 'app.html'
