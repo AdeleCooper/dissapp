@@ -79,42 +79,81 @@ export class SprintsProvider {
       this.sprintIds = null;
       this.newSprintId = null;
       var self = this;
-  
+
       // Adds new sprint to Sprints collection
-      this.db.collection("Sprints").add(data
-      ).then(function(docRef) {
-        console.log("Document written with ID: ", docRef.id);
-        // Needs other sprints in sprint collection in order to update Sprint Collection array
-        self.getSprintCollection(/*self.collectionId/*'9uovgQw0zVKFdMyMJXNz'*/).then((doc) =>
-        {
-          if (doc) {
-            self.sprintIds = doc.data().Sprints;
-            console.log(self.sprintIds);
-            // change .push to "docRef.id"
-            self.sprintIds.push(docRef.id);
-            console.log(self.sprintIds);
-          }
-        self.sprintCollectionsService.updateSprintCollection(self.collectionId/*'9uovgQw0zVKFdMyMJXNz'*/,self.sprintIds);
-        resolve(doc);
+      this.db.collection("Sprints").add(data)
+        .then(function (docRef) {
+          console.log("Document written with ID: ", docRef.id);
+          // Needs other sprints in sprint collection in order to update Sprint Collection array
+          self.getSprintCollection(/*self.collectionId/*'9uovgQw0zVKFdMyMJXNz'*/)
+            .then((doc) => {
+              if (doc) {
+                self.sprintIds = doc.data().Sprints;
+                console.log(self.sprintIds);
+                // change .push to "docRef.id"
+                self.sprintIds.push(docRef.id);
+                console.log(self.sprintIds);
+              }
+              self.sprintCollectionsService.updateSprintCollection(self.collectionId/*'9uovgQw0zVKFdMyMJXNz'*/, self.sprintIds);
+              resolve(doc);
+            })
+            .catch((error: any) => {
+              console.error("getSprints - error received: " + error);
+            });
         })
-        .catch((error: any) =>
-        {
-          console.error("getSprints - error received: " + error);
+        .catch((error: any) => {
+          console.log('rejecting due to error: ' + error);
+          reject(error);
         });
-        
-    }).catch((error: any) => {
-        console.log('rejecting due to error: ' + error);
-        reject(error);
-      });
 
     });
   }
 
-  updateTasks(data,sprintId){
-    this.db.collection("Sprints").doc(sprintId).update({ Tasks: data })
-    .catch((error: any) => {
-      console.error("getSprints - error received: " + error);
+  editSprint(data): Promise<any> {
+    return new Promise((resolve, reject) => {
+      JSON.stringify(data);
+      this.sprintIds = null;
+      this.newSprintId = null;
+      var self = this;
+
+      // Adds new sprint to Sprints collection
+      this.db.collection("Sprints")
+        .doc(data.ID)
+        .set(data)
+        .then(function () {
+          //console.log("Document written with ID: ", docRef.ID);
+          resolve();
+
+          // Needs other sprints in sprint collection in order to update Sprint Collection array
+          // self.getSprintCollection(/*self.collectionId/*'9uovgQw0zVKFdMyMJXNz'*/)
+          //   .then((doc) => {
+          //     if (doc) {
+          //       self.sprintIds = doc.data().Sprints;
+          //       console.log(self.sprintIds);
+          //       // change .push to "docRef.id"
+          //       self.sprintIds.push(docRef.id);
+          //       console.log(self.sprintIds);
+          //     }
+          //     self.sprintCollectionsService.updateSprintCollection(self.collectionId/*'9uovgQw0zVKFdMyMJXNz'*/, self.sprintIds);
+          //     resolve(doc);
+          //   })
+          //   .catch((error: any) => {
+          //     console.error("getSprints - error received: " + error);
+          //   });
+
+        }).catch((error: any) => {
+          console.log('rejecting due to error: ' + error);
+          reject(error);
+        });
+
     });
+  }
+
+  updateTasks(data, sprintId) {
+    this.db.collection("Sprints").doc(sprintId).update({ Tasks: data })
+      .catch((error: any) => {
+        console.error("getSprints - error received: " + error);
+      });
 
   }
 
@@ -138,7 +177,7 @@ export class SprintsProvider {
   //         reject(error);
   //       });
   //   });
-    
+
   // }
 
 }
