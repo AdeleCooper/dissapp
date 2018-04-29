@@ -17,7 +17,7 @@ import { TasksPage } from '../pages/tasks/tasks';
 import { ClientsPage } from '../pages/clients/clients';
 import { ClientTasksPage } from '../pages/client-tasks/client-tasks';
 
-//import { AngularFireModule } from 'angularfire2';
+import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -59,7 +59,9 @@ firebase.initializeApp(credentials);
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    //AngularFireModule.initializeApp(credentials.firebase),
+    AngularFireModule.initializeApp(credentials),
+    //firebase.initializeApp(credentials),
+    AngularFireModule,
     AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,
     AngularFireDatabaseModule,

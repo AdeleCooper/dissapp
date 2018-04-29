@@ -32,6 +32,7 @@ export class PlannerHomePage {
   public progressBarValue: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public sprintsService: SprintsProvider, public tasksService: TasksProvider, public plannersService: PlannersProvider) {
+    console.log("Planner Home page constructor");
     this.getCurrentSprint();
     this.getPlannerInfo();
   }
@@ -47,7 +48,7 @@ export class PlannerHomePage {
     this.taskCount = 0;
     var self = this;
 
-    this.sprintsService.getSprintCollection('9uovgQw0zVKFdMyMJXNz').then((doc) => {
+    this.sprintsService.getSprintCollection(/*'9uovgQw0zVKFdMyMJXNz'*/).then((doc) => {
       if (doc) {
         //var x = doc.data();
         self.sprintId = doc.data().ActiveSprint;

@@ -20,7 +20,8 @@ import { ClientTasksPage } from '../pages/client-tasks/client-tasks';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = PlannerHomePage;
+  //rootPage: any = PlannerHomePage;
+  rootPage: any = SignInPage;
   pages: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {

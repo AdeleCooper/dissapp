@@ -11,6 +11,7 @@ import { SprintCollectionsProvider } from '../../providers/sprint-collections/sp
 */
 @Injectable()
 export class SprintsProvider {
+  collectionId: any;
   name: string;
   db: any;
   sprint: any;
@@ -22,11 +23,17 @@ export class SprintsProvider {
     this.db = firebase.firestore();
   }
 
-  getSprintCollection(collectionId): Promise<any> {
+  setSprintCollectionId(collectionId) {
+    this.collectionId = collectionId;
+  }
+
+  getSprintCollection(/*collectionId*/): Promise<any> {
+    var self = this;
+
     return new Promise((resolve, reject) => {
       this.db
         .collection("SprintCollections")
-        .doc(collectionId)
+        .doc(self.collectionId)
         .get()
         .then((doc: any) => {
           if (doc.exists) {
@@ -77,8 +84,8 @@ export class SprintsProvider {
       this.db.collection("Sprints").add(data
       ).then(function(docRef) {
         console.log("Document written with ID: ", docRef.id);
-        // Needs other sprints in sprint collection in order to update Sprint Collectionn array
-        self.getSprintCollection('9uovgQw0zVKFdMyMJXNz').then((doc) =>
+        // Needs other sprints in sprint collection in order to update Sprint Collection array
+        self.getSprintCollection(/*self.collectionId/*'9uovgQw0zVKFdMyMJXNz'*/).then((doc) =>
         {
           if (doc) {
             self.sprintIds = doc.data().Sprints;
@@ -87,7 +94,7 @@ export class SprintsProvider {
             self.sprintIds.push(docRef.id);
             console.log(self.sprintIds);
           }
-        self.sprintCollectionsService.updateSprintCollection('9uovgQw0zVKFdMyMJXNz',self.sprintIds);
+        self.sprintCollectionsService.updateSprintCollection(self.collectionId/*'9uovgQw0zVKFdMyMJXNz'*/,self.sprintIds);
         resolve(doc);
         })
         .catch((error: any) =>

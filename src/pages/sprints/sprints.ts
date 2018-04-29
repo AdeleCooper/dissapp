@@ -59,7 +59,7 @@ export class SprintsPage {
     this.otherSprintIds = [];
     var self = this;
 
-    this.sprintsService.getSprintCollection('9uovgQw0zVKFdMyMJXNz').then((doc) => {
+    this.sprintsService.getSprintCollection(/*'9uovgQw0zVKFdMyMJXNz'*/).then((doc) => {
       if (doc) {
         //var x = doc.data();
         self.sprintIds = doc.data().Sprints;
