@@ -34,7 +34,6 @@ export class TasksPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TasksPage');
-    //console.log(this.tasks[0].Description);
   }
 
   deleteTask(task) {
@@ -47,14 +46,6 @@ export class TasksPage {
           break;
         }
       }
-      // self.tasks.forEach(element => {
-      //   if (element == task) {
-      //     console.log("found task to delete");
-      //   } else {
-      //     temp.push(element);
-      //   }
-      // });
-      // self.tasks = temp;
       self.sprintsService.updateTasks(remainingTasks, self.sprintid);
 
       var data = {
@@ -64,15 +55,8 @@ export class TasksPage {
         console.log("hewwooo delete");
         self.events.publish('tasks:changed', data);
       }
-
-      //this.events.publish('tasks:changed', data);
     });
-    //this.tasksService.deleteTask();
   }
-
-  // moveTask(){
-  //   console.log("move");
-  // }
 
   editTask(task) {
     console.log("edit");
@@ -90,16 +74,16 @@ export class TasksPage {
   }
 
   addTask() {
-
     console.log("addTask clicked");
+    var self = this;
     let modal = this.modalCtrl.create(TaskFormPage);
 
-    var self = this;
-
     modal.onDidDismiss(data => {
-      // if (data.Title == null) {
-      //   console.log("exit");
-      // } else {
+        if (!data) {
+          console.info('task add cancelled');
+          return;
+        }
+
         self.tasksService.addTask(data, self.sprintid, self.tasks).then((doc) => {
           self.tasks.push(data);
           console.log("inside .then");
@@ -110,15 +94,6 @@ export class TasksPage {
             self.events.publish('tasks:changed', data);
           }
         });
-      // }
-
-      //console.log('add sprint data: ' + JSON.stringify(data));
-      // self.sprintsService.addSprint(data).then((doc) => {
-      //   self.getSprints();
-      //   console.log("inside .then")
-      // }
-      // );
-      // TODO - then try calling self.getSprints to re-fetch all sprints and update UI
     });
     modal.present();
 

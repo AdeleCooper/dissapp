@@ -29,6 +29,6 @@ export class TaskFormPage {
   
   dismiss() {
     console.log(this.task);
-    this.viewCtrl.dismiss(this.task);
+    this.viewCtrl.dismiss();
   }  
 }

@@ -35,6 +35,6 @@ export class SprintFormPage {
 
   dismiss() {
     console.log(this.sprint);
-    this.viewCtrl.dismiss(this.sprint);
+    this.viewCtrl.dismiss();
   }
 }

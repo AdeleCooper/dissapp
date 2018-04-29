@@ -104,8 +104,9 @@ export class SprintsPage {
     var self = this;
 
     modal.onDidDismiss(data => {
-      if (data.Title == null) {
+      if (!data) {
         console.log("exit");
+        return;
       } else {
         self.sprintsService.addSprint(data).then((doc) => {
           self.getSprints();
