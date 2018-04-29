@@ -20,11 +20,11 @@ export class PlannersProvider {
     console.log("HrrQGLqfoIodRJ3JctCo");
   }
 
-  getPlanner(): Promise<any> {
+  getPlanner(plannerId): Promise<any> {
     return new Promise((resolve, reject) => {
       this.db
         .collection("Planners")
-        .doc("HrrQGLqfoIodRJ3JctCo")
+        .doc(plannerId)
         .get()
         .then((doc: any) => {
           if (doc.exists) {

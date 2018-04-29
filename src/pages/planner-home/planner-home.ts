@@ -34,8 +34,7 @@ export class PlannerHomePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public sprintsService: SprintsProvider, public tasksService: TasksProvider, public plannersService: PlannersProvider) {
     console.log("Planner Home page constructor");
-    this.getCurrentSprint();
-    this.getPlannerInfo();
+    this.getPlannerInfo(this.navParams.get("id"));
   }
 
   ionViewDidLoad() {
@@ -77,10 +76,10 @@ export class PlannerHomePage {
     });
   }
 
-  getPlannerInfo() {
+  getPlannerInfo(plannerid) {
     this.planner = null;
     var self = this;
-    this.plannersService.getPlanner().then((doc) => {
+    this.plannersService.getPlanner(plannerid).then((doc) => {
       if (doc) {
         self.planner = doc.data();
         self.clients = self.planner.Clients;
@@ -88,7 +87,8 @@ export class PlannerHomePage {
         self.name = self.planner.Name;
         self.clientNumber = self.planner.Clients.length;
         console.log(self.clientNumber);
-
+        self.sprintsService.setSprintCollectionId(self.planner.SprintCollectionID);
+        this.getCurrentSprint();
       }
     }
     ).catch((error: any) => {

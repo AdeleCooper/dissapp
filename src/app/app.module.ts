@@ -30,6 +30,7 @@ import { SprintsProvider } from '../providers/sprints/sprints';
 import { TasksProvider } from '../providers/tasks/tasks';
 import { PlannersProvider } from '../providers/planners/planners';
 import { SprintCollectionsProvider } from '../providers/sprint-collections/sprint-collections';
+import { UsersProvider } from '../providers/users/users';
 //import { credentials } from './config';
 
 var credentials = {
@@ -94,7 +95,8 @@ firebase.initializeApp(credentials);
     TasksProvider,
     PlannersProvider,
     SprintCollectionsProvider,
-    TasksProvider
+    TasksProvider,
+    UsersProvider
   ]
 })
 export class AppModule {}

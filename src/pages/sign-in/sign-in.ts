@@ -4,6 +4,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { PlannerHomePage } from '../planner-home/planner-home';
 import { SignUpPage } from '../sign-up/sign-up';
 import { SprintsProvider } from '../../providers/sprints/sprints';
+import { UsersProvider } from '../../providers/users/users';
 
 /**
  * Generated class for the SignInPage page.
@@ -24,7 +25,7 @@ export class SignInPage {
   public errorMessage: string;
 
   constructor(public afAuth: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams,
-    public sprintsService: SprintsProvider, public toast: ToastController) {
+    public sprintsService: SprintsProvider, public usersService: UsersProvider, public toast: ToastController) {
   }
 
   ionViewDidLoad() {
@@ -40,12 +41,20 @@ export class SignInPage {
     console.log(password);
     try {
       const result = await this.afAuth.auth.signInWithEmailAndPassword(email, password);
-      console.log(result);
-
-      // TODO - change this based on the email address?
-      this.sprintsService.setSprintCollectionId('9uovgQw0zVKFdMyMJXNz');
-
-      this.navCtrl.push(PlannerHomePage);
+      console.log(result.uid);
+      var uid = result.uid;
+      console.log(uid);
+      this.usersService.getUser(uid).then((doc) => {
+        //console.log(doc.data);
+        var dataReturned = doc.data();
+        var data = {
+          id: dataReturned.PlannerId,
+        }
+        //push page sending planner id.
+        //if type is palnner
+        //elswe push other page
+        this.navCtrl.push(PlannerHomePage, data);
+      });
     } catch (e) {
       this.errorMessage = e.message;
       console.error(e.message);
@@ -54,5 +63,5 @@ export class SignInPage {
         duration: 3000
       }).present();
     }
-  }  
+  }
 }
