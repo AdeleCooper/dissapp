@@ -39,6 +39,30 @@ export class SprintsPage {
       self.currentSprintTasks = data.tasks;
       console.log("subscribe ps" + data.tasks);
     });
+
+    this.events.subscribe('sprint:changed', (data) => {
+      var sprint = data.sprint;
+      var sprintToUpdate = null;
+      if (sprint.ID == this.currentSprint.id) {
+        sprintToUpdate = this.currentSprint;
+      } else {
+        for (var i = 0; i < this.inactiveSprints.length; i++) {
+          if (sprint.ID == this.inactiveSprints[i].id) {
+            sprintToUpdate = this.inactiveSprints[i];
+            break;
+          }
+        }
+      }
+
+      if (sprintToUpdate) {
+        sprintToUpdate.Title = sprint.Title;
+        sprintToUpdate.StartDate = sprint.StartDate;
+        sprintToUpdate.EndDate = sprint.EndDate;
+        sprintToUpdate.Notes = sprint.Notes;
+        sprintToUpdate.Status = sprint.Status;
+      }
+    });
+    
   }
 
   ionViewDidLoad() {
