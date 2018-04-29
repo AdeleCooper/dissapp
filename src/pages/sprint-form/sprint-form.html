@@ -49,8 +49,17 @@
     </ion-item>
     <ion-item>
       <ion-label>Status</ion-label>
-      <ion-textarea [(ngModel)]="sprint.Status" name="Status"></ion-textarea>
+      <ion-select [(ngModel)]="sprint.Status" name="Status">
+        <ion-option value="Planned">Planned</ion-option>
+        <ion-option value="InProgress">In Progress</ion-option>
+        <ion-option value="Completed">Completed</ion-option>
+      </ion-select>
     </ion-item>
+    
+    <!-- <ion-item>
+      <ion-label>Status</ion-label>
+      <ion-textarea [(ngModel)]="sprint.Status" name="Status"></ion-textarea>
+    </ion-item> -->
     <ion-item *ngIf="creating">
       <ion-label>Sprint Weight</ion-label>
       <ion-textarea [(ngModel)]="sprint.Weight" name="Weight"></ion-textarea>

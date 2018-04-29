@@ -54,7 +54,6 @@ export class CurrentSprintPage {
     //     self.otherTasks = data.tasks;
     //   }
     // });
-    
   }
 
   ionViewDidLoad() {
@@ -75,10 +74,12 @@ export class CurrentSprintPage {
     var self = this;
     this.otherTasks = [];
     this.completedTasks = [];
+    this.tasks = [];
+
     this.taskIds.forEach(task => {
       self.tasksService.getTask(task).then((doc) => {
         var taskData = doc.data();
-        self.tasks = taskData;
+        self.tasks.push(taskData);
         taskData.id = task;
         if (taskData.Progress == "Complete") {
           self.completedTasks.push(taskData);
@@ -123,7 +124,7 @@ export class CurrentSprintPage {
       } else {
         console.log("editSprint done - updating database");
 
-        data.Tasks = self.tasks;
+        data.Tasks = self.taskIds;
         self.sprintsService.editSprint(data).then((doc) => {
           //self.getSprints();
           self.currentSprint.Title = data.Title;
@@ -131,6 +132,8 @@ export class CurrentSprintPage {
           self.currentSprint.EndDate = data.EndDate;
           self.currentSprint.Notes = data.Notes;
           self.currentSprint.Status = data.Status;
+
+          self.events.publish('sprint:changed', { sprint: self.currentSprint });
         });
 
         // self.sprintsService.addSprint(data).then((doc) => {

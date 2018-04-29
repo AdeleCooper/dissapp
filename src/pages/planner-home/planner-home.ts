@@ -66,7 +66,11 @@ export class PlannerHomePage {
               })
             });
           }
-          self.progressBarValue = Math.round(self.currentSprint.CompletedTasks / sprint.Tasks.length * 100);
+          if (sprint.Tasks && sprint.Tasks.length) {
+            self.progressBarValue = Math.round(self.currentSprint.CompletedTasks / sprint.Tasks.length * 100);
+          } else {
+            self.progressBarValue = 0;
+          }
           console.log(self.currentSprint.CompletedTasks +"/"+sprint.Tasks.length + " = " + self.progressBarValue);
           (<HTMLInputElement>document.getElementById('progressbar')).value = self.progressBarValue;
         });
