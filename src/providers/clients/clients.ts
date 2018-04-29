@@ -40,14 +40,28 @@ export class ClientsProvider {
     });
   }
 
-  addClient() {
-
-    this.db.collection("Clients").add({
-      email: "another@example.com",
-      img: "path/img.jpg",
-      location: "Cambridge",
-      name: "adele"
+  addClient(data): Promise<any> {
+    return new Promise((resolve, reject) => {
+      console.log(data);
+      JSON.stringify(data);
+      this.db
+        .collection("Clients")
+        .add(data)
+        .then(function(docRef) {
+          console.log("Document written with ID: ", docRef.id);
+          resolve(docRef);
+      }).catch((error: any) => {
+          console.log('rejecting due to error: ' + error);
+          reject(error);
+        });
     });
+
+    // this.db.collection("Clients").add({
+    //   email: "another@example.com",
+    //   img: "path/img.jpg",
+    //   location: "Cambridge",
+    //   name: "adele"
+    // });
 
     // db.collection("users").doc("new1").set({
     //   name: "john"
@@ -60,9 +74,7 @@ export class ClientsProvider {
   deleteClient() {
   }
 
-  updateClient() {
-    this.db.collection("Clients").doc("tafa7E1ssj391krsHbcK").update({
-      location: "London"
-    });
+  updateClient(id, data) {
+    this.db.collection("Clients").doc(id).update(data);
   }
 }

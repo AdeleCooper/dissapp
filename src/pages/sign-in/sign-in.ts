@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 import { AngularFireAuth } from 'angularfire2/auth';
 import { PlannerHomePage } from '../planner-home/planner-home';
 import { SignUpPage } from '../sign-up/sign-up';
+import { ClientHomePage } from '../client-home/client-home';
+import { SignUpOnboardingPage } from '../sign-up-onboarding/sign-up-onboarding';
 import { SprintsProvider } from '../../providers/sprints/sprints';
 import { UsersProvider } from '../../providers/users/users';
 
@@ -33,7 +35,7 @@ export class SignInPage {
   }
 
   signUp() {
-    this.navCtrl.setRoot(SignUpPage);
+    this.navCtrl.setRoot(SignUpOnboardingPage);
   }
 
   async signIn(email, password) {
@@ -48,12 +50,18 @@ export class SignInPage {
         //console.log(doc.data);
         var dataReturned = doc.data();
         var data = {
-          id: dataReturned.PlannerId,
+          id: dataReturned.Id
+        }
+        if (dataReturned.Type == "Planner") {
+          this.navCtrl.setRoot(PlannerHomePage, data);
+        } else if (dataReturned.Type == "Client") {
+          this.navCtrl.setRoot(ClientHomePage, data);
+
         }
         //push page sending planner id.
         //if type is palnner
         //elswe push other page
-        this.navCtrl.push(PlannerHomePage, data);
+
       });
     } catch (e) {
       this.errorMessage = e.message;

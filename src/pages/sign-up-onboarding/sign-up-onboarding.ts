@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { SignUpPage } from '../sign-up/sign-up';
 
 /**
  * Generated class for the SignUpOnboardingPage page.
@@ -20,6 +21,22 @@ export class SignUpOnboardingPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SignUpOnboardingPage');
+  }
+
+  clientClicked(){
+    var client = {
+      Type: "Client"
+    }
+    this.navCtrl.push(SignUpPage, client);
+
+  }
+
+  plannerClicked(){
+    var planner = {
+      Type: "Planner"
+    }
+    this.navCtrl.push(SignUpPage, planner);
+
   }
 
 }

@@ -32,6 +32,8 @@ export class PlannerHomePage {
   public clientNumber: any;
   public progressBarValue: any;
 
+  //TODO: sign out button that logs out and either refreshes app or sets root page to log back in
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public sprintsService: SprintsProvider, public tasksService: TasksProvider, public plannersService: PlannersProvider) {
     console.log("Planner Home page constructor");
     this.getPlannerInfo(this.navParams.get("id"));

@@ -17,6 +17,7 @@ import { TasksPage } from '../pages/tasks/tasks';
 import { TaskFormPage } from '../pages/task-form/task-form';
 import { ClientsPage } from '../pages/clients/clients';
 import { ClientTasksPage } from '../pages/client-tasks/client-tasks';
+import { ClientHomePage } from '../pages/client-home/client-home';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -58,7 +59,8 @@ firebase.initializeApp(credentials);
     TasksPage,
     TaskFormPage,
     ClientsPage,
-    ClientTasksPage ],
+    ClientTasksPage,
+    ClientHomePage ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
@@ -84,7 +86,8 @@ firebase.initializeApp(credentials);
     TasksPage,
     TaskFormPage,
     ClientsPage,
-    ClientTasksPage
+    ClientTasksPage,
+    ClientHomePage
   ],
   providers: [
     StatusBar,
