@@ -75,7 +75,7 @@ export class CurrentSprintPage {
     this.otherTasks = [];
     this.completedTasks = [];
     this.tasks = [];
-    
+
     this.taskIds.forEach(task => {
       self.tasksService.getTask(task).then((doc) => {
         var taskData = doc.data();
@@ -124,7 +124,7 @@ export class CurrentSprintPage {
       } else {
         console.log("editSprint done - updating database");
 
-        data.Tasks = self.tasks;
+        data.Tasks = self.taskIds;
         self.sprintsService.editSprint(data).then((doc) => {
           //self.getSprints();
           self.currentSprint.Title = data.Title;
