@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import 'firebase/firestore';
 import { ClientsPage } from '../../pages/clients/clients';
+import { SprintsPage } from '../../pages/sprints/Sprints';
 import { SprintsProvider } from '../../providers/sprints/sprints';
 import { TasksProvider } from '../../providers/tasks/tasks';
 import { ClientsProvider } from '../../providers/clients/clients';
@@ -95,6 +96,11 @@ export class PlannerHomePage {
     });
   }
   
+  sprintsClicked() {
+    //var data = { Clients: this.clients};
+    this.navCtrl.push(SprintsPage);
+  }
+
   clientsClicked() {
     var data = { Clients: this.clients};
     this.navCtrl.push(ClientsPage, data);

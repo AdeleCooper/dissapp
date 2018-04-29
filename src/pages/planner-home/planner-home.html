@@ -1,31 +1,33 @@
 <ion-header>
-    <ion-navbar class="greytool">
-      <button ion-button icon-only menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-      <ion-title class="greytitle">
-        Homepage
-      </ion-title>
-      <ion-buttons end>
-      </ion-buttons>
-    </ion-navbar>
-  </ion-header>
-  <ion-content style="background-image: url('assets/imgs/bg3.jpg');">
+  <ion-navbar class="greytool">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title class="greytitle">
+      Homepage
+    </ion-title>
+    <ion-buttons end>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content style="background-image: url('assets/imgs/bg3.jpg');">
   <ion-grid style="padding: 0px;">
     <ion-row style="background-color: transparent; height: 20vh;">
       <div style="text-align: center; width: 100vw; position: relative; top:0vh; z-index: 5;">
-        <p style="color: white;"><strong>Welcome Back, {{name}}!</strong></p>
-          <div class="profile-image-wrapper">
-            <div class="profile-image-placeholder">
-              <div class="profile-image-placeholder-icon-wrapper">
-                <ion-icon name="person"></ion-icon>
-              </div>
+        <p style="color: white;">
+          <strong>Welcome Back, {{name}}!</strong>
+        </p>
+        <div class="profile-image-wrapper">
+          <div class="profile-image-placeholder">
+            <div class="profile-image-placeholder-icon-wrapper">
+              <ion-icon name="person"></ion-icon>
             </div>
           </div>
-    </div>
+        </div>
+      </div>
     </ion-row>
     <ion-row style="width: 100%; background-color: white;">
-      <ion-col style="border-right: 1px solid black; text-align: center; color: black;">
+      <ion-col (click)="sprintsClicked()" style="border-right: 1px solid black; text-align: center; color: black;">
         <h1>{{taskCount}}</h1>
         <p>Tasks outstanding</p>
       </ion-col>
@@ -36,20 +38,22 @@
     </ion-row>
     <ion-row style="width: 100%; text-align: center; background-color: white;">
       <ion-col>
-          <progress id="progressbar" value="0" max="100">
-            </progress>
-            <p>{{progressBarValue}}% Complete</p>
+        <progress id="progressbar" value="0" max="100">
+        </progress>
+        <p>{{progressBarValue}}% Complete</p>
       </ion-col>
     </ion-row>
 
-    <ion-item-divider detail-push>Upcoming</ion-item-divider>
-            <div *ngFor="let task of currentSprintTasks;let i=index">
-              <ion-item no-lines text-wrap *ngIf="i<4">
-                <p item-start>-</p>
-                <strong>{{task.User}}</strong>: {{task.Description}}
-                <p item-end>{{task.Size}}</p>
-              </ion-item>
-            </div>
+    <ion-row (click)="sprintsClicked()" style="width: 100%; text-align: center; background-color: white;">
+      <ion-item-divider detail-push>Upcoming</ion-item-divider>
+      <div *ngFor="let task of currentSprintTasks;let i=index">
+        <ion-item no-lines text-wrap *ngIf="i<4">
+          <p item-start>-</p>
+          {{task.Description}}
+          <p item-end>{{task.Size}}</p>
+        </ion-item>
+      </div>
+    </ion-row>
     <!-- <ion-row>
       <ion-item-divider detail-push>Upcoming</ion-item-divider>
       <ion-item no-lines text-wrap><p item-start>-</p><strong>Sarah</strong>: go over quiz answers<p item-end>S</p></ion-item>
@@ -57,10 +61,10 @@
       <ion-item no-lines text-wrap><p item-start>-</p><strong>Sarah</strong>: list of possible themes<p item-end>M</p></ion-item>
       <ion-item no-lines text-wrap><p item-start>-</p><strong>Me</strong>: organise portfolio<p item-end>S</p></ion-item>
     </ion-row> -->
-    <ion-row style="width: 100%; text-align: center; background-color: white;">
+    <!-- <ion-row style="width: 100%; text-align: center; background-color: white;">
       <ion-col>
       <p style="color: black;">New Task <ion-icon name="add"></ion-icon></p>
       </ion-col>
-    </ion-row>
-  </ion-grid> 
+    </ion-row> -->
+  </ion-grid>
 </ion-content>
