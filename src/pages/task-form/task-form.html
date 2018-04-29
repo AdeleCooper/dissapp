@@ -7,7 +7,7 @@
 
 <ion-header>
   <ion-toolbar>
-    <ion-title>Add New Task
+    <ion-title>{{title}}
       <!-- <button ion-button icon-only>
         <ion-icon name="close"></ion-icon>
       </button> -->
@@ -32,7 +32,7 @@
       <ion-label>Task Size</ion-label>
       <ion-textarea [(ngModel)]="task.Size" name="Size"></ion-textarea>
     </ion-item>
-    <button ion-button type="submit" block>Add Task</button>
+    <button ion-button type="submit" block>{{title}}</button>
   </form>
 
 </ion-content>

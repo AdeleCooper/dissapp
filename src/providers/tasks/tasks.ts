@@ -62,10 +62,9 @@ export class TasksProvider {
       });
 
     });
-
   }  
-  editTask(taskId, data){
-    // return new Promise((resolve, reject) => {
+  editTask(data): Promise<any> {
+    return new Promise((resolve, reject) => {
       console.log(data.id);
       this.db
         .collection("Tasks")
@@ -80,11 +79,14 @@ export class TasksProvider {
         //     reject("Task doesn't exist");
         //   }
         // })
+        .then(function () {
+          resolve();
+        })
         .catch((error: any) => {
           console.log('rejecting due to error: ' + error);
-          //reject(error);
+          reject(error);
         });
-    // });
+    });
   }
   deleteTask(taskId, sprintid, tasks): Promise<any> {
     return new Promise((resolve, reject) => {

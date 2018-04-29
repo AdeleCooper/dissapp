@@ -48,29 +48,49 @@ export class TasksPage {
       }
       self.sprintsService.updateTasks(remainingTasks, self.sprintid);
 
-      var data = {
-        tasks: self.tasks
-      }
       if (self.active) {
         console.log("hewwooo delete");
-        self.events.publish('tasks:changed', data);
+        self.events.publish('tasks:changed', { tasks: self.tasks});
       }
     });
   }
 
   editTask(task) {
     console.log("edit");
-    var data = {
-      Description: "task test",
-      Due: "11/11/11",
-      Progress: "complete",
-      Size: "M",
-      User: "Bea",
-      UserID: "",
-      id: task.id
-    }
-    console.log(task.id);
-    this.tasksService.editTask(task.id, data);
+
+    var self = this;
+    var formParams = { Task: task};
+    let modal = this.modalCtrl.create(TaskFormPage, formParams);
+
+    modal.onDidDismiss(data => {
+        if (!data) {
+          console.info('task add cancelled');
+          return;
+        }
+
+        self.tasksService.editTask(data).then(() => {
+          task.Description = data.Description;
+          task.Size = data.Size;
+
+          if (self.active) {
+            console.log("edit tasks success - publishing event");
+            self.events.publish('tasks:changed', { tasks: self.tasks});
+          }          
+        });
+    });
+    modal.present();    
+
+    // var data = {
+    //   Description: "task test",
+    //   Due: "11/11/11",
+    //   Progress: "complete",
+    //   Size: "M",
+    //   User: "Bea",
+    //   UserID: "",
+    //   id: task.id
+    // }
+    // console.log(task.id);
+    // this.tasksService.editTask(task.id, data);
   }
 
   addTask() {
@@ -85,13 +105,13 @@ export class TasksPage {
         }
 
         self.tasksService.addTask(data, self.sprintid, self.tasks).then((doc) => {
-          self.tasks.push(data);
           console.log("inside .then");
           data.id = doc.id;
-          self.tasksService.editTask(data.id, data);
+          self.tasks.push(data);
+          self.tasksService.editTask(data);
           if (self.active) {
             console.log("hewwwooo");
-            self.events.publish('tasks:changed', data);
+            self.events.publish('tasks:changed', { tasks: self.tasks});
           }
         });
     });
