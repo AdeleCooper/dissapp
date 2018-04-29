@@ -19,7 +19,19 @@ export class SprintFormPage {
   sprint = {
     Tasks: []
   }
+  title: any;
+  creating: boolean;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
+    var sprintToEdit = navParams.get('Sprint');
+    if (sprintToEdit) {
+      this.sprint = sprintToEdit;
+      this.title = "Edit Sprint";
+      this.creating = false;
+    } else {
+      this.title = "Add Sprint";
+      this.creating = true;
+    }
   }
 
   ionViewDidLoad() {

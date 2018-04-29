@@ -59,39 +59,40 @@ export class SprintsPage {
     this.otherSprintIds = [];
     var self = this;
 
-    this.sprintsService.getSprintCollection(/*'9uovgQw0zVKFdMyMJXNz'*/).then((doc) => {
-      if (doc) {
-        //var x = doc.data();
-        self.sprintIds = doc.data().Sprints;
+    this.sprintsService.getSprintCollection(/*'9uovgQw0zVKFdMyMJXNz'*/)
+      .then((doc) => {
+        if (doc) {
+          //var x = doc.data();
+          self.sprintIds = doc.data().Sprints;
 
-        self.sprintIds.forEach(id => {
-          self.sprintsService.getSprint(id).then((doc) => {
-            var sprint = doc.data();
-            sprint.id = id;
-            //var date = new Date(sprint.StartDate);
-            sprint.StartDate = self.fixupDate(sprint.StartDate);//date.toLocaleDateString("en-GB");
-            sprint.EndDate = self.fixupDate(sprint.EndDate);//date.toLocaleDateString("en-GB");
+          self.sprintIds.forEach(id => {
+            self.sprintsService.getSprint(id).then((doc) => {
+              var sprint = doc.data();
+              sprint.id = id;
+              //var date = new Date(sprint.StartDate);
+              sprint.StartDate = self.fixupDate(sprint.StartDate);//date.toLocaleDateString("en-GB");
+              sprint.EndDate = self.fixupDate(sprint.EndDate);//date.toLocaleDateString("en-GB");
 
-            if (sprint.Active) {
-              self.currentSprint = sprint;
-              // As soon as the current sprint is located, request the tasks associated with that sprint
-              if (sprint.Tasks) {
-                sprint.Tasks.forEach(task => {
-                  self.tasksService.getTask(task).then((doc) => {
-                    var task = doc.data();
-                    self.currentSprintTasks.push(task);
-                  })
-                });
+              if (sprint.Active) {
+                self.currentSprint = sprint;
+                // As soon as the current sprint is located, request the tasks associated with that sprint
+                if (sprint.Tasks) {
+                  sprint.Tasks.forEach(task => {
+                    self.tasksService.getTask(task).then((doc) => {
+                      var task = doc.data();
+                      self.currentSprintTasks.push(task);
+                    })
+                  });
+                }
+              } else {
+                self.inactiveSprints.push(sprint);
+                console.log(self.inactiveSprints);
+                self.otherSprintIds.push(id);
               }
-            } else {
-              self.inactiveSprints.push(sprint);
-              console.log(self.inactiveSprints);
-              self.otherSprintIds.push(id);
-            }
+            });
           });
-        });
-      }
-    })
+        }
+      })
       .catch((error: any) => {
         console.error("getSprints - error received: " + error);
       });
@@ -125,6 +126,7 @@ export class SprintsPage {
     });
     modal.present();
   }
+  
   showCurrentSprintClicked(): void {
     console.log("showCurrentSprintClicked");
     //this.navCtrl.push('SprintsPage');

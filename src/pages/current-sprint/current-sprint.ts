@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, Events } from 'ionic-angular';
 import { TasksProvider } from '../../providers/tasks/tasks';
 import { SprintsProvider } from '../../providers/sprints/sprints';
 import { TasksPage } from '../tasks/tasks';
+import { SprintFormPage } from '../sprint-form/sprint-form';
 
 /**
  * Generated class for the CurrentSprintPage page.
@@ -22,9 +23,11 @@ export class CurrentSprintPage {
   completedTasks: any = [];
   currentSprint: any;
   sprintid:any;
+  tasks: any = [];
 
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public tasksService: TasksProvider, public sprintsService: SprintsProvider, public events: Events) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    public modalCtrl: ModalController,
+    public tasksService: TasksProvider, public sprintsService: SprintsProvider, public events: Events) {
     //his.taskIds = this.navParams.get('Tasks');
     this.currentSprint = {
       Title: this.navParams.get('Title'),
@@ -68,7 +71,6 @@ export class CurrentSprintPage {
     })
   }
 
-
   getTasks() {
     var self = this;
     this.otherTasks = [];
@@ -76,14 +78,13 @@ export class CurrentSprintPage {
     this.taskIds.forEach(task => {
       self.tasksService.getTask(task).then((doc) => {
         var taskData = doc.data();
+        self.tasks = taskData;
         taskData.id = task;
         if (taskData.Progress == "Complete") {
           self.completedTasks.push(taskData);
-
-        }else {
+        } else {
           self.otherTasks.push(taskData);
         }
-        
       })
     });
   }
@@ -106,5 +107,38 @@ export class CurrentSprintPage {
       Active: this.currentSprint.Active
     }
     this.navCtrl.push(TasksPage, data);
+  }
+
+  editSprint() {
+    console.log("editSprint called");
+    var self = this;
+    var formParams = { Sprint: this.currentSprint };
+
+    let modal = this.modalCtrl.create(SprintFormPage, formParams);
+
+    modal.onDidDismiss(data => {
+      if (!data) {
+        console.log("editSprint cancelled");
+        return;
+      } else {
+        console.log("editSprint done - updating database");
+
+        data.Tasks = self.tasks;
+        self.sprintsService.editSprint(data).then((doc) => {
+          //self.getSprints();
+          self.currentSprint.Title = data.Title;
+          self.currentSprint.StartDate = data.StartDate;
+          self.currentSprint.EndDate = data.EndDate;
+          self.currentSprint.Notes = data.Notes;
+          self.currentSprint.Status = data.Status;
+        });
+
+        // self.sprintsService.addSprint(data).then((doc) => {
+        //   self.getSprints();
+        //   console.log("inside .then")
+        // });
+      }
+    });
+    modal.present();    
   }
 }
