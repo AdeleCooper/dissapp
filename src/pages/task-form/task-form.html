@@ -28,9 +28,17 @@
       <ion-label>Task Name</ion-label>
       <ion-input type="text" [(ngModel)]="task.Description" name="Description"></ion-input>
     </ion-item>
-    <ion-item>
+    <!-- <ion-item>
       <ion-label>Task Size</ion-label>
       <ion-textarea [(ngModel)]="task.Size" name="Size"></ion-textarea>
+    </ion-item> -->
+    <ion-item>
+      <ion-label>Task Size</ion-label>
+      <ion-select [(ngModel)]="task.Size" name="Size">
+        <ion-option value="L">Large</ion-option>
+        <ion-option value="M">Medium</ion-option>
+        <ion-option value="S">Small</ion-option>
+      </ion-select>
     </ion-item>
     <button ion-button type="submit" block>{{title}}</button>
   </form>

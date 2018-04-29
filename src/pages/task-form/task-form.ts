@@ -14,7 +14,7 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
   templateUrl: 'task-form.html',
 })
 export class TaskFormPage {
-  task = {};
+  task: any = {};
   title: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
@@ -24,6 +24,7 @@ export class TaskFormPage {
       this.title = "Edit Task";
       console.info('task id: '+ task.id);
     } else {
+      this.task.Size = "M";
       this.title = "Add Task";
     }
     console.info('task: '+ task);
