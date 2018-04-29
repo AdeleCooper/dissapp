@@ -14,6 +14,7 @@ import { SprintsPage } from '../pages/sprints/Sprints';
 import { SprintFormPage } from '../pages/sprint-form/sprint-form';
 import { CurrentSprintPage } from '../pages/current-sprint/current-sprint';
 import { TasksPage } from '../pages/tasks/tasks';
+import { TaskFormPage } from '../pages/task-form/task-form';
 import { ClientsPage } from '../pages/clients/clients';
 import { ClientTasksPage } from '../pages/client-tasks/client-tasks';
 
@@ -54,6 +55,7 @@ firebase.initializeApp(credentials);
     SprintFormPage,
     CurrentSprintPage,
     TasksPage,
+    TaskFormPage,
     ClientsPage,
     ClientTasksPage ],
   imports: [
@@ -79,6 +81,7 @@ firebase.initializeApp(credentials);
     SprintFormPage,
     CurrentSprintPage,
     TasksPage,
+    TaskFormPage,
     ClientsPage,
     ClientTasksPage
   ],

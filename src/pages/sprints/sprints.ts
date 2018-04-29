@@ -36,9 +36,9 @@ export class SprintsPage {
 
     //NOT SUBSCRIBING! :(
     this.events.subscribe('tasks:changed', (data) => {
-      self.currentSprintTasks = data.tasks;  
-      console.log("subscribe ps" + data.tasks);    
-   });
+      self.currentSprintTasks = data.tasks;
+      console.log("subscribe ps" + data.tasks);
+    });
   }
 
   ionViewDidLoad() {
@@ -104,15 +104,16 @@ export class SprintsPage {
     var self = this;
 
     modal.onDidDismiss(data => {
-      if (data.Title == null){
+      if (data.Title == null) {
         console.log("exit");
-      }else {
+      } else {
         self.sprintsService.addSprint(data).then((doc) => {
           self.getSprints();
           console.log("inside .then")
         }
-        );}
-        
+        );
+      }
+
       //console.log('add sprint data: ' + JSON.stringify(data));
       // self.sprintsService.addSprint(data).then((doc) => {
       //   self.getSprints();
@@ -123,23 +124,22 @@ export class SprintsPage {
     });
     modal.present();
   }
-  showCurrentSprintClicked() : void
-  {
+  showCurrentSprintClicked(): void {
     console.log("showCurrentSprintClicked");
-     //this.navCtrl.push('SprintsPage');
-     this.navCtrl.push(CurrentSprintPage, this.currentSprint);
-  }  
+    //this.navCtrl.push('SprintsPage');
+    this.navCtrl.push(CurrentSprintPage, this.currentSprint);
+  }
 
-  showSprintClicked(sprint,i) : void {
+  showSprintClicked(sprint, i): void {
     //console.log(sprint);
     console.log("showSprintClicked");
     //var sprintID = this.otherSprintIds[i-1];
-    
+
     //sprint.id = this.otherSprintIds[i-1];
     console.log(sprint.id + sprint);
     this.navCtrl.push(CurrentSprintPage, sprint);
   }
-  
+
 
 
 }

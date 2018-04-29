@@ -39,7 +39,7 @@ export class TasksProvider {
         });
     });
   }  
-  addTask(data,sprintid, tasks): Promise<any> {
+  addTask(data, sprintid, tasks): Promise<any> {
     return new Promise((resolve, reject) => {
       JSON.stringify(data);
       var self = this;
