@@ -43,10 +43,10 @@
       <ion-label>Notes</ion-label>
       <ion-textarea [(ngModel)]="sprint.Notes" name="Notes"></ion-textarea>
     </ion-item>
-    <ion-item *ngIf="creating">
+    <!-- <ion-item *ngIf="creating">
       <ion-label>Completed tasks</ion-label>
       <ion-textarea [(ngModel)]="sprint.CompletedTasks" name="CompletedTasks"></ion-textarea>
-    </ion-item>
+    </ion-item> -->
     <ion-item>
       <ion-label>Status</ion-label>
       <ion-select [(ngModel)]="sprint.Status" name="Status">
@@ -60,10 +60,10 @@
       <ion-label>Status</ion-label>
       <ion-textarea [(ngModel)]="sprint.Status" name="Status"></ion-textarea>
     </ion-item> -->
-    <ion-item *ngIf="creating">
+    <!-- <ion-item *ngIf="creating">
       <ion-label>Sprint Weight</ion-label>
       <ion-textarea [(ngModel)]="sprint.Weight" name="Weight"></ion-textarea>
-    </ion-item>
+    </ion-item> -->
     <button ion-button type="submit" block>{{title}}</button>
   </form>
 

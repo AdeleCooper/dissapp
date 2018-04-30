@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { ClientsProvider } from '../../providers/clients/clients';
 import { TasksProvider } from '../../providers/tasks/tasks';
+import { SignInPage } from '../../pages/sign-in/sign-in';
 
 /**
  * Generated class for the ClientHomePage page.
@@ -23,8 +25,8 @@ export class ClientHomePage {
   public taskids: any = [];
   public tasks: any = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public tasksService: TasksProvider, public clientsService: ClientsProvider) {
-    console.log("made it"+ this.navParams.get('id'));
+  constructor(public afAuth: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams, public tasksService: TasksProvider, public clientsService: ClientsProvider) {
+    console.log("made it" + this.navParams.get('id'));
     this.clientId = this.navParams.get('id');
     this.getClient();
 
@@ -34,10 +36,10 @@ export class ClientHomePage {
     console.log('ionViewDidLoad ClientHomePage');
   }
 
-  getClient(){
+  getClient() {
     this.clientData = null;
     var self = this;
-    this.clientsService.getClient(this.clientId).then((doc)=> {
+    this.clientsService.getClient(this.clientId).then((doc) => {
       self.clientData = doc.data();
       console.log(self.clientData);
       self.name = self.clientData.Name;
@@ -49,7 +51,7 @@ export class ClientHomePage {
 
   }
 
-  getTasks(){
+  getTasks() {
     var self = this;
     this.tasks = [];
     this.taskids.forEach(task => {
@@ -60,8 +62,21 @@ export class ClientHomePage {
     });
   }
 
-  refresh(){
+  refresh() {
     this.getClient();
+  }
+
+  logOut() {
+    console.log("logout");
+    var self = this;
+    this.afAuth.auth.signOut().then(function () {
+      // Sign-out successful.
+      console.log("success");
+      self.navCtrl.setRoot(SignInPage);
+    }, function (error) {
+      // An error happened.
+      console.log("error");
+    });
   }
 
 }

@@ -8,10 +8,6 @@
 
   <ion-navbar>
     <ion-title>Clients</ion-title>
-    <ion-buttons end>
-      <button (click)="addClient()">
-        <ion-icon name="add"></ion-icon> New Client</button>
-    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -24,7 +20,7 @@
   <ion-list>
     <ion-list>
       <ion-input placeholder="Enter your Clients ID..." name="clientid" type="text" required [(ngModel)]="newClientId"></ion-input>
-      <p (click)="addClient()">Add</p>
+     <button ion-button (click)="addClient()" >Add Client</button>
     </ion-list>
     <ion-item *ngFor="let client of clientsData;let i=index " (click)="clientClicked(client,i)">
       {{client.Name}}

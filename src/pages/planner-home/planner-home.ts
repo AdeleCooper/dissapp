@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import 'firebase/firestore';
+import { SignInPage } from '../../pages/sign-in/sign-in';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { ClientsPage } from '../../pages/clients/clients';
 import { SprintsPage } from '../../pages/sprints/Sprints';
 import { SprintsProvider } from '../../providers/sprints/sprints';
@@ -35,7 +37,7 @@ export class PlannerHomePage {
 
   //TODO: sign out button that logs out and either refreshes app or sets root page to log back in
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public sprintsService: SprintsProvider, public tasksService: TasksProvider, public plannersService: PlannersProvider, public events: Events) {
+  constructor(public afAuth: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams, public sprintsService: SprintsProvider, public tasksService: TasksProvider, public plannersService: PlannersProvider, public events: Events) {
     console.log("Planner Home page constructor");
     console.log("inside planner home" + this.navParams.get("id"));
     this.plannerId = this.navParams.get("id");
@@ -123,5 +125,17 @@ export class PlannerHomePage {
   clientsClicked() {
     var data = { Clients: this.clients, PlannerId: this.plannerId};
     this.navCtrl.push(ClientsPage, data);
+  }
+  logOut() {
+    console.log("logout");
+    var self = this;
+    this.afAuth.auth.signOut().then(function () {
+      // Sign-out successful.
+      console.log("success");
+      self.navCtrl.setRoot(SignInPage);
+    }, function (error) {
+      // An error happened.
+      console.log("error");
+    });
   }
 }
