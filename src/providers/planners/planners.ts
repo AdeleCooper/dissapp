@@ -62,10 +62,20 @@ export class PlannersProvider {
   deletePlanner() {
   }
 
-  updatePlanner() {
-    this.db.collection("Planners").doc("HrrQGLqfoIodRJ3JctCo").update({
-      location: "London"
+  updatePlanner(plannerid, data): Promise<any> {
+    return new Promise((resolve, reject) => {
+      console.log(data);
+      JSON.stringify(data);
+      this.db
+        .collection("Planners").doc(plannerid)
+        .update(data)
+        .then(function() {
+          resolve();
+      }).catch((error: any) => {
+          console.log('rejecting due to error: ' + error);
+          reject(error);
+        });
     });
+ // this.db.collection("Planners").doc(plannerid).update(data);
   }
 }
-

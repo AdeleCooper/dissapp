@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import 'firebase/firestore';
 import { ClientsPage } from '../../pages/clients/clients';
 import { SprintsPage } from '../../pages/sprints/Sprints';
@@ -31,13 +31,21 @@ export class PlannerHomePage {
   public name: any;
   public clientNumber: any;
   public progressBarValue: any;
+  public plannerId: any;
 
   //TODO: sign out button that logs out and either refreshes app or sets root page to log back in
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public sprintsService: SprintsProvider, public tasksService: TasksProvider, public plannersService: PlannersProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public sprintsService: SprintsProvider, public tasksService: TasksProvider, public plannersService: PlannersProvider, public events: Events) {
     console.log("Planner Home page constructor");
     console.log("inside planner home" + this.navParams.get("id"));
+    this.plannerId = this.navParams.get("id");
     this.getPlannerInfo(this.navParams.get("id"));
+    var self = this;
+    this.events.subscribe('clients:changed', (data) => {
+      self.clients = data.clients;
+      self.clientNumber = self.clients.length;
+      console.log("subscribe ps" + data.clients);
+    });
   }
 
   ionViewDidLoad() {
@@ -113,7 +121,7 @@ export class PlannerHomePage {
   }
 
   clientsClicked() {
-    var data = { Clients: this.clients};
+    var data = { Clients: this.clients, PlannerId: this.plannerId};
     this.navCtrl.push(ClientsPage, data);
   }
 }
