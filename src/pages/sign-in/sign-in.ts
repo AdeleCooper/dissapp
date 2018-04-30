@@ -49,8 +49,9 @@ export class SignInPage {
       this.usersService.getUser(uid).then((doc) => {
         //console.log(doc.data);
         var dataReturned = doc.data();
+        console.log("get user: "+dataReturned.ID);
         var data = {
-          id: dataReturned.Id
+          id: dataReturned.ID
         }
         if (dataReturned.Type == "Planner") {
           this.navCtrl.setRoot(PlannerHomePage, data);

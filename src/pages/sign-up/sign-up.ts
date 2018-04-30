@@ -6,6 +6,9 @@ import { SignInPage } from '../sign-in/sign-in';
 import { ClientHomePage } from '../client-home/client-home';
 import { SignUpOnboardingPage } from '../sign-up-onboarding/sign-up-onboarding';
 import { ClientsProvider } from '../../providers/clients/clients';
+import { UsersProvider } from '../../providers/users/users';
+import { SprintCollectionsProvider } from '../../providers/sprint-collections/sprint-collections';
+import { PlannersProvider } from '../../providers/planners/planners';
 
 
 /**
@@ -24,10 +27,11 @@ export class SignUpPage {
   public username1: string;
   public password1: string;
   public email1: string;
+  public location1: string;
   public errorMessage: string;
   public type: string;
 
-  constructor(public afAuth: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams,public clientsService: ClientsProvider, public toast: ToastController) {
+  constructor(public afAuth: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams, public plannersService: PlannersProvider, public sprintCollectionsService: SprintCollectionsProvider, public usersService: UsersProvider, public clientsService: ClientsProvider, public toast: ToastController) {
     this.type = this.navParams.get("Type");
   }
 
@@ -45,8 +49,8 @@ export class SignUpPage {
     try {
       const result = await this.afAuth.auth.createUserWithEmailAndPassword(email, password);
       console.log(result.uid);
-      
-      if (this.type == "Client"){
+
+      if (this.type == "Client") {
         console.log("client created");
         this.toast.create({
           message: "Account Created - Welcome!",
@@ -55,7 +59,7 @@ export class SignUpPage {
         this.setUpClient(result.uid);
         // this.navCtrl.setRoot(ClientHomePage);
 
-      }else if(this.type == "Planner"){
+      } else if (this.type == "Planner") {
         console.log("planner created");
         this.toast.create({
           message: "Account Created - Welcome!",
@@ -63,7 +67,7 @@ export class SignUpPage {
         }).present();
         this.setUpPlanner(result.uid);
 
-      }else{
+      } else {
         this.toast.create({
           message: "Whoops, something went wrong. Please try again!",
           duration: 4000
@@ -80,46 +84,59 @@ export class SignUpPage {
     }
   }
 
-  setUpClient(uid){
+  setUpClient(uid) {
     var clientData = {
-      Location1: "Location",
-      Name: "name",
+      Location1: this.location1,
+      Name: this.username1,
       PlannerID: "",
       ID: "",
+      Tasks: []
     }
-
+    var self = this;
     this.clientsService.addClient(clientData).then((doc) => {
       console.log(doc.id);
       var id = doc.id;
+      var userData = {
+        ID: id,
+        Type: "Client"
+      }
+      var updateData = {
+        ID: id
+      }
+      self.clientsService.updateClient(id, updateData).then((doc) => {
+        console.log("client id updated!");
+        self.usersService.createUser(uid, userData).then((doc) => {
+          console.log('complete!');
+          this.navCtrl.setRoot(ClientHomePage, { id: id });
+        });
+      });
     });
-
-    // this.clientsService.addClient(clientData)
-
-    var userData = {
-      ID: "clientID",
-      Type: "Client"
-    }
-
-
-
-
-    //this.navCtrl.setRoot(ClientHomePage);
   }
 
-  setUpPlanner(uid){
-    var plannerData = {
-      Name: "name",
-      SprintCollectionID: "sprincollid",
-      Clients: []
-    }
+  setUpPlanner(uid) {
+    var self = this;
+    this.sprintCollectionsService.addSprintCollection({ Sprints: [], ActiveSprint: null}).then((doc) => {
+      console.log(doc.id);
+      var plannerData = {
+        Name: self.username1,
+        Location: self.location1,
+        SprintCollectionID: doc.id,
+        Clients: []
+      }
+      self.plannersService.addPlanner(plannerData).then((doc2) => {
+        var userData = {
+          ID: doc2.id,
+          Type: "Planner"
+        }
+        self.usersService.createUser(uid, userData).then((doc) => {
+          console.log('added planner!');
+          this.navCtrl.setRoot(PlannerHomePage, { id: doc2.id });
+        });
+
+      })
 
 
-    var userData = {
-      ID: "plannerID",
-      Type: "Planner"
-    }
-    this.navCtrl.setRoot(PlannerHomePage);
-
+    })
   }
 
 

@@ -42,23 +42,21 @@ export class PlannersProvider {
     });
   }
 
-  addPlanner() {
-
-    //change to plannner fields
-
-    this.db.collection("Planners").add({
-      email: "another@example.com",
-      img: "path/img.jpg",
-      location: "Cambridge",
-      name: "adele"
+  addPlanner(data): Promise<any> {
+    return new Promise((resolve, reject) => {
+      console.log(data);
+      JSON.stringify(data);
+      this.db
+        .collection("Planners")
+        .add(data)
+        .then(function(docRef) {
+          console.log("Document written with ID: ", docRef.id);
+          resolve(docRef);
+      }).catch((error: any) => {
+          console.log('rejecting due to error: ' + error);
+          reject(error);
+        });
     });
-
-    // db.collection("users").doc("new1").set({
-    //   name: "john"
-    // }
-    // ).then((data)=>{
-    //   console.log(data)
-    //   console.log("hi")})
   }
 
   deletePlanner() {

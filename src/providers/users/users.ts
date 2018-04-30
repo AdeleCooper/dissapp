@@ -44,15 +44,13 @@ export class UsersProvider {
 
   createUser(uid,data): Promise<any> {
     return new Promise((resolve, reject) => {
-      console.log(uid);
+      console.log(data);
       JSON.stringify(data);
       this.db
-        .collection("Users")
-        .doc(uid)
-        .add(data)
-        .then(function(docRef) {
-          console.log("Document written with ID: ", docRef.id);
-          resolve(docRef);
+        .collection("Users").doc(uid)
+        .set(data)
+        .then(function() {
+          resolve();
       }).catch((error: any) => {
           console.log('rejecting due to error: ' + error);
           reject(error);

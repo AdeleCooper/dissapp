@@ -87,6 +87,7 @@ export class SprintsPage {
       .then((doc) => {
         if (doc) {
           //var x = doc.data();
+          if(doc.data().Sprints.length > 0){
           self.sprintIds = doc.data().Sprints;
 
           self.sprintIds.forEach(id => {
@@ -115,6 +116,7 @@ export class SprintsPage {
               }
             });
           });
+        }
         }
       })
       .catch((error: any) => {

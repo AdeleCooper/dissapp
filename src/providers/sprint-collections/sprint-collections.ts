@@ -47,7 +47,21 @@ export class SprintCollectionsProvider {
       });
   }
 
-  addSprintCollection() {
+  addSprintCollection(data) : Promise<any> {
+    return new Promise((resolve, reject) => {
+      console.log(data);
+      JSON.stringify(data);
+      this.db
+        .collection("SprintCollections")
+        .add(data)
+        .then(function(docRef) {
+          console.log("Document written with ID: ", docRef.id);
+          resolve(docRef);
+      }).catch((error: any) => {
+          console.log('rejecting due to error: ' + error);
+          reject(error);
+        });
+    });
 
   }
 

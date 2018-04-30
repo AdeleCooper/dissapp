@@ -19,6 +19,7 @@ export class ClientsProvider {
 
   getClient(clientId): Promise<any> {
     return new Promise((resolve, reject) => {
+      console.log("get client provider - clientId: " + clientId);
       this.db
         .collection("Clients")
         //.doc("KXLiOkFJOrDfrW7oVz3S")
@@ -26,10 +27,10 @@ export class ClientsProvider {
         .get()
         .then((doc: any) => {
           if (doc.exists) {
-            //console.log('resolving');
+            console.log('resolving');
             resolve(doc);
           } else {
-            //console.log('rejecting due to non-existent doc');
+            console.log('rejecting due to non-existent doc');
             reject("doc doesn't exist");
           }
         })
@@ -74,7 +75,20 @@ export class ClientsProvider {
   deleteClient() {
   }
 
-  updateClient(id, data) {
-    this.db.collection("Clients").doc(id).update(data);
+  updateClient(id, data): Promise<any> {
+    return new Promise((resolve, reject) => {
+      console.log(data);
+      JSON.stringify(data);
+      this.db
+        .collection("Clients")
+        .doc(id)
+        .update(data)
+        .then(function() {
+          resolve();
+      }).catch((error: any) => {
+          console.log('rejecting due to error: ' + error);
+          reject(error);
+        });
+    });
   }
 }

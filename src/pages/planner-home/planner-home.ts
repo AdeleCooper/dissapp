@@ -36,6 +36,7 @@ export class PlannerHomePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public sprintsService: SprintsProvider, public tasksService: TasksProvider, public plannersService: PlannersProvider) {
     console.log("Planner Home page constructor");
+    console.log("inside planner home" + this.navParams.get("id"));
     this.getPlannerInfo(this.navParams.get("id"));
   }
 
@@ -53,7 +54,10 @@ export class PlannerHomePage {
     this.sprintsService.getSprintCollection(/*'9uovgQw0zVKFdMyMJXNz'*/).then((doc) => {
       if (doc) {
         //var x = doc.data();
+
+        if (doc.data().ActiveSprint){
         self.sprintId = doc.data().ActiveSprint;
+        
 
         self.sprintsService.getSprint(self.sprintId).then((doc) => {
           var sprint = doc.data();
@@ -76,6 +80,7 @@ export class PlannerHomePage {
           console.log(self.currentSprint.CompletedTasks +"/"+sprint.Tasks.length + " = " + self.progressBarValue);
           (<HTMLInputElement>document.getElementById('progressbar')).value = self.progressBarValue;
         });
+      }
       }
     }).catch((error: any) => {
       console.error("getSprint - error received: " + error);
