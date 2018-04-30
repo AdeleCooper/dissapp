@@ -17,8 +17,6 @@
 
 <ion-content padding>
 
-  <div (click)="refresh()" >REFRESH</div>
-
   <p>
     <strong>Type: </strong>Client</p>
   <p>
@@ -27,6 +25,9 @@
     <strong>ID: </strong>{{clientId}}</p>
   <p>
     Give the ID to your planner so they can add you to their system.</p>
+
+   <button ion-button (click)="refresh()">Refresh
+    </button>
 
   <p>
     <strong>Tasks:</strong>

@@ -49,15 +49,11 @@
       <ion-card *ngFor="let sprint of inactiveSprints;let i=index" (click)="showSprintClicked(sprint,i)">
         <ion-card-header>
           {{sprint.Title}}
-          <ion-icon name="trash"></ion-icon>
-        
         </ion-card-header>
 
         <ion-card-content>
-          <p>{{sprint.id}}</p>
           <p>{{sprint.StartDate}} - {{sprint.EndDate}}</p>
           <p>{{sprint.Status}}</p>
-          <p>Tasks Completed: {{sprint.CompletedTasks}}</p>
           <p>{{sprint.Weight}} weight</p>
 
         </ion-card-content>
