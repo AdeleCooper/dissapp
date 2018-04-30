@@ -114,6 +114,24 @@ export class TasksProvider {
         });
       });
   }    
+
+  addClientTask(data): Promise<any> {
+    return new Promise((resolve, reject) => {
+      JSON.stringify(data);
+      this.db.collection("Tasks").add(data
+      ).then(function(docRef) {
+        console.log("Document written with ID: ", docRef.id);
+        //console.log(taskids);
+        //taskids.push(docRef.id);
+        console.log(docRef.id);
+        resolve(docRef);
+    }).catch((error: any) => {
+        console.log('rejecting due to error: ' + error);
+        reject(error);
+      });
+
+    });
+  }  
   // moveTask(taskId, sprintid): Promise<any> {
 
   //   //need to get tasks from new sprint!! maybe remove??

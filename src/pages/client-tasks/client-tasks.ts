@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, ModalController, NavParams } from 'ionic-angular';
 import { ClientsProvider } from '../../providers/clients/clients';
 import { TasksProvider } from '../../providers/tasks/tasks';
+import { TaskFormPage } from '../task-form/task-form';
 
 /**
  * Generated class for the ClientTasksPage page.
@@ -21,7 +22,8 @@ export class ClientTasksPage {
   public tasks: any = [];
   public clientTasks: any = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public tasksService: TasksProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController,
+    public clientsService: ClientsProvider, public tasksService: TasksProvider) {
     this.client = this.navParams.get('Client');
     console.log("hey listen!"+this.client);
     this.clientId = this.navParams.get('Id');
@@ -37,8 +39,28 @@ export class ClientTasksPage {
   }
 
 
-  addTask(){
-    console.log("add task for client");
+  addTask() {
+    console.log("addTask clicked");
+    var self = this;
+    let modal = this.modalCtrl.create(TaskFormPage);
+
+    modal.onDidDismiss(data => {
+        if (!data) {
+          console.info('task add cancelled');
+          return;
+        }
+
+        self.tasksService.addClientTask(data).then((doc) => {
+          console.log("inside .then");
+          data.id = doc.id;
+          self.tasks.push(doc.id);
+          self.tasksService.editTask(data);
+          self.clientTasks.push(data);
+          self.clientsService.updateClient(self.clientId, {Tasks: self.tasks});
+        });
+    });
+    modal.present();
+
   }
 
   getTasks(){

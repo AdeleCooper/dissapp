@@ -51,12 +51,17 @@ export class ClientHomePage {
 
   getTasks(){
     var self = this;
+    this.tasks = [];
     this.taskids.forEach(task => {
       self.tasksService.getTask(task).then((doc) => {
         var task = doc.data();
         self.tasks.push(task);
       })
     });
+  }
+
+  refresh(){
+    this.getClient();
   }
 
 }

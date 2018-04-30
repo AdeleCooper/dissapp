@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, ModalController, NavParams } from 'ionic-angular';
 import { ClientsProvider } from '../../providers/clients/clients';
 import { ClientTasksPage } from '../client-tasks/client-tasks';
+import { TaskFormPage } from '../task-form/task-form';
+import { TasksProvider } from '../../providers/tasks/tasks';
 
 /**
  * Generated class for the ClientsPage page.
@@ -19,7 +21,8 @@ export class ClientsPage {
   public clientIds: any = [];
   public clientsData: any = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public clientsService: ClientsProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,
+    public tasksService: TasksProvider, public clientsService: ClientsProvider) {
     this.clientIds = this.navParams.get('Clients');
     var self = this;
 
