@@ -12,10 +12,10 @@ import { SprintsProvider } from '../../providers/sprints/sprints';
 @Injectable()
 export class TasksProvider {
   name: string;
-  db:any;
+  db: any;
 
   constructor(public sprintsService: SprintsProvider) {
-    this.db = firebase.firestore();    
+    this.db = firebase.firestore();
   }
 
   getTask(taskId): Promise<any> {
@@ -38,7 +38,7 @@ export class TasksProvider {
           reject(error);
         });
     });
-  }  
+  }
   addTask(data, sprintid, tasks): Promise<any> {
     return new Promise((resolve, reject) => {
       JSON.stringify(data);
@@ -49,20 +49,18 @@ export class TasksProvider {
       });
       // Adds new task to Sprint
       this.db.collection("Tasks").add(data
-      ).then(function(docRef) {
+      ).then(function (docRef) {
         console.log("Document written with ID: ", docRef.id);
-        console.log(taskids);
         taskids.push(docRef.id);
-        console.log(taskids);
         self.sprintsService.updateTasks(taskids, sprintid);
         resolve(docRef);
-    }).catch((error: any) => {
+      }).catch((error: any) => {
         console.log('rejecting due to error: ' + error);
         reject(error);
       });
-
     });
-  }  
+  }
+  
   editTask(data): Promise<any> {
     return new Promise((resolve, reject) => {
       console.log(data.id);
@@ -70,15 +68,6 @@ export class TasksProvider {
         .collection("Tasks")
         .doc(data.id)
         .set(data)
-        // .then((doc: any) => {
-        //   if (doc.exists) {
-        //     //console.log('resolving');
-        //     resolve(doc);
-        //   } else {
-        //     //console.log('rejecting due to non-existent doc');
-        //     reject("Task doesn't exist");
-        //   }
-        // })
         .then(function () {
           resolve();
         })
@@ -88,6 +77,7 @@ export class TasksProvider {
         });
     });
   }
+
   deleteTask(taskId, sprintid, tasks): Promise<any> {
     return new Promise((resolve, reject) => {
       var self = this;
@@ -99,9 +89,9 @@ export class TasksProvider {
         .delete()
         .then((doc: any) => {
           tasks.forEach(element => {
-            if (element.id == taskId){
+            if (element.id == taskId) {
               console.log("found task to delete");
-            }else {
+            } else {
               taskstoreturn.push(element.id);
             }
             resolve(taskstoreturn);
@@ -112,31 +102,28 @@ export class TasksProvider {
           console.log('rejecting due to error: ' + error);
           reject(error);
         });
-      });
-  }    
+    });
+  }
 
   addClientTask(data): Promise<any> {
     return new Promise((resolve, reject) => {
       JSON.stringify(data);
       this.db.collection("Tasks").add(data
-      ).then(function(docRef) {
+      ).then(function (docRef) {
         console.log("Document written with ID: ", docRef.id);
-        //console.log(taskids);
-        //taskids.push(docRef.id);
-        console.log(docRef.id);
         resolve(docRef);
-    }).catch((error: any) => {
+      }).catch((error: any) => {
         console.log('rejecting due to error: ' + error);
         reject(error);
       });
 
     });
-  }  
+  }
   // moveTask(taskId, sprintid): Promise<any> {
 
   //   //need to get tasks from new sprint!! maybe remove??
   //   //will need to get list of all sprint ids to choose from a drop down menu
-    
+
   //   return new Promise((resolve, reject) => {
   //     this.db
   //       .collection("Tasks")

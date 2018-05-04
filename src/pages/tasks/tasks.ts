@@ -80,72 +80,28 @@ export class TasksPage {
     });
     modal.present();    
 
-    // var data = {
-    //   Description: "task test",
-    //   Due: "11/11/11",
-    //   Progress: "complete",
-    //   Size: "M",
-    //   User: "Bea",
-    //   UserID: "",
-    //   id: task.id
-    // }
-    // console.log(task.id);
-    // this.tasksService.editTask(task.id, data);
   }
 
   addTask() {
-    console.log("addTask clicked");
     var self = this;
+    //create task form modal 
     let modal = this.modalCtrl.create(TaskFormPage);
-
     modal.onDidDismiss(data => {
         if (!data) {
-          console.info('task add cancelled');
+          console.info('add task cancelled');
           return;
         }
-
         self.tasksService.addTask(data, self.sprintid, self.tasks).then((doc) => {
-          console.log("inside .then");
           data.id = doc.id;
           self.tasks.push(data);
           self.tasksService.editTask(data);
           if (self.active) {
-            console.log("hewwwooo");
             self.events.publish('tasks:changed', { tasks: self.tasks});
           }
         });
     });
     modal.present();
 
-    // console.log("add");
-    // var self = this;
-    // var data = {
-    //   Description: "task test",
-    //   Due: "11/11/11",
-    //   Progress: "complete",
-    //   Size: "S",
-    //   User: "Bea",
-    //   UserID: "",
-    //   id: ""
-    // }
-    // //return updated list of tasks and repopulate so that page updates 
-    // this.tasksService.addTask(data, this.sprintid, this.tasks).then((doc) => {
-    //   data.id = doc.id;
-    //   console.log("new id:" + doc.id);
-    //   self.tasks.push(data);
-    //   console.log("after add" + self.tasks);
-    //   //adds task id to task field
-    //   self.tasksService.editTask(data.id, data);
-    //   if(self.active){
-    //     console.log("hewwwooo");
-    //     self.events.publish('tasks:changed', data);
-    //   }
-    // });
-
   }
 }
-// add/delete/move/edit tasks
-// will probs have to pass sprint id all the way through so can delete/move/add tasks
-//then edit a sprint
-//progress bar
-//list of clients
+

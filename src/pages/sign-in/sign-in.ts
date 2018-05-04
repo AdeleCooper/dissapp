@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { PlannerHomePage } from '../planner-home/planner-home';
-import { SignUpPage } from '../sign-up/sign-up';
 import { ClientHomePage } from '../client-home/client-home';
 import { SignUpOnboardingPage } from '../sign-up-onboarding/sign-up-onboarding';
 import { SprintsProvider } from '../../providers/sprints/sprints';
@@ -35,7 +34,7 @@ export class SignInPage {
   }
 
   signUp() {
-    this.navCtrl.setRoot(SignUpOnboardingPage);
+    this.navCtrl.push(SignUpOnboardingPage);
   }
 
   async signIn(email, password) {

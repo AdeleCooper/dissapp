@@ -57,7 +57,6 @@ export class SignUpPage {
           duration: 5000
         }).present();
         this.setUpClient(result.uid);
-        // this.navCtrl.setRoot(ClientHomePage);
 
       } else if (this.type == "Planner") {
         console.log("planner created");
@@ -94,7 +93,6 @@ export class SignUpPage {
     }
     var self = this;
     this.clientsService.addClient(clientData).then((doc) => {
-      console.log(doc.id);
       var id = doc.id;
       var userData = {
         ID: id,

@@ -25,13 +25,9 @@ export class ClientTasksPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController,
     public clientsService: ClientsProvider, public tasksService: TasksProvider) {
     this.client = this.navParams.get('Client');
-    console.log("hey listen!"+this.client);
     this.clientId = this.navParams.get('Id');
     this.tasks = this.client.Tasks;
-    console.log(this.clientId);
     this.getTasks();
-    console.log("whyyy?"+this.tasks);
-    console.log("why2"+this.clientTasks);
   }
 
   ionViewDidLoad() {
@@ -40,7 +36,6 @@ export class ClientTasksPage {
 
 
   addTask() {
-    console.log("addTask clicked");
     var self = this;
     let modal = this.modalCtrl.create(TaskFormPage);
 
@@ -49,9 +44,7 @@ export class ClientTasksPage {
           console.info('task add cancelled');
           return;
         }
-
         self.tasksService.addClientTask(data).then((doc) => {
-          console.log("inside .then");
           data.id = doc.id;
           self.tasks.push(doc.id);
           self.tasksService.editTask(data);
@@ -60,7 +53,6 @@ export class ClientTasksPage {
         });
     });
     modal.present();
-
   }
 
   getTasks(){

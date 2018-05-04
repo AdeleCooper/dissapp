@@ -43,7 +43,7 @@
     </ion-row>
 
     <ion-row (click)="sprintsClicked()" style="width: 100%; text-align: center; background-color: white;">
-      <ion-item-divider detail-push>Upcoming</ion-item-divider>
+      <ion-item-divider detail-push>Current Sprint: Upcoming</ion-item-divider>
       <div *ngFor="let task of currentSprintTasks;let i=index">
         <ion-item no-lines text-wrap *ngIf="i<4">
           <p item-start>-</p>
@@ -52,17 +52,5 @@
         </ion-item>
       </div>
     </ion-row>
-    <!-- <ion-row>
-      <ion-item-divider detail-push>Upcoming</ion-item-divider>
-      <ion-item no-lines text-wrap><p item-start>-</p><strong>Sarah</strong>: go over quiz answers<p item-end>S</p></ion-item>
-      <ion-item no-lines text-wrap><p item-start>-</p><strong>Andrew and Dan</strong>: organise venue showing<p item-end>M</p></ion-item>
-      <ion-item no-lines text-wrap><p item-start>-</p><strong>Sarah</strong>: list of possible themes<p item-end>M</p></ion-item>
-      <ion-item no-lines text-wrap><p item-start>-</p><strong>Me</strong>: organise portfolio<p item-end>S</p></ion-item>
-    </ion-row> -->
-    <!-- <ion-row style="width: 100%; text-align: center; background-color: white;">
-      <ion-col>
-      <p style="color: black;">New Task <ion-icon name="add"></ion-icon></p>
-      </ion-col>
-    </ion-row> -->
   </ion-grid>
 </ion-content>
