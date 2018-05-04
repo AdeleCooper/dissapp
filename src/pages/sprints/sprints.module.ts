@@ -10,4 +10,5 @@ import { SprintsPage } from './sprints';
     IonicPageModule.forChild(SprintsPage),
   ],
 })
+
 export class SprintsPageModule {}

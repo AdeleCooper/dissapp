@@ -7,9 +7,6 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>{{title}}
-      <!-- <button ion-button icon-only>
-        <ion-icon name="close"></ion-icon>
-      </button> -->
     </ion-title>
     <ion-buttons start>
       <button ion-button color="dark" (click)="dismiss()">
@@ -17,14 +14,9 @@
         <ion-icon name="md-close" showWhen="android, windows"></ion-icon>
       </button>
     </ion-buttons>
-    <!-- <ion-button end>
-      <button ion-button></button>
-    </ion-button> -->
-    <!-- <button ion-button round color="dark" type="exit" block>X</button> -->
-
   </ion-toolbar>
 </ion-header>
-<!-- TODO: change ngModels to what sprint should be - look up drop downs change database fields to match names -->
+
 <ion-content padding>
   <form (ngSubmit)="addSprint()">
     <ion-item>
@@ -43,10 +35,6 @@
       <ion-label>Notes</ion-label>
       <ion-textarea [(ngModel)]="sprint.Notes" name="Notes"></ion-textarea>
     </ion-item>
-    <!-- <ion-item *ngIf="creating">
-      <ion-label>Completed tasks</ion-label>
-      <ion-textarea [(ngModel)]="sprint.CompletedTasks" name="CompletedTasks"></ion-textarea>
-    </ion-item> -->
     <ion-item>
       <ion-label>Status</ion-label>
       <ion-select [(ngModel)]="sprint.Status" name="Status">
@@ -55,16 +43,6 @@
         <ion-option value="Completed">Completed</ion-option>
       </ion-select>
     </ion-item>
-    
-    <!-- <ion-item>
-      <ion-label>Status</ion-label>
-      <ion-textarea [(ngModel)]="sprint.Status" name="Status"></ion-textarea>
-    </ion-item> -->
-    <!-- <ion-item *ngIf="creating">
-      <ion-label>Sprint Weight</ion-label>
-      <ion-textarea [(ngModel)]="sprint.Weight" name="Weight"></ion-textarea>
-    </ion-item> -->
     <button ion-button type="submit" block>{{title}}</button>
   </form>
-
 </ion-content>

@@ -32,7 +32,6 @@ import { TasksProvider } from '../providers/tasks/tasks';
 import { PlannersProvider } from '../providers/planners/planners';
 import { SprintCollectionsProvider } from '../providers/sprint-collections/sprint-collections';
 import { UsersProvider } from '../providers/users/users';
-//import { credentials } from './config';
 
 var credentials = {
       apiKey: "AIzaSyA4d7whowjrUKOI_x42XpPlczsVhjr7Rio",
@@ -65,7 +64,6 @@ firebase.initializeApp(credentials);
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(credentials),
-    //firebase.initializeApp(credentials),
     AngularFireModule,
     AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,

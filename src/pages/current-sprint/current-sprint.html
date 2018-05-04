@@ -15,13 +15,11 @@
   </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
   <ion-grid style="padding: 0px;">
 
     <ion-row (click) = "viewCompletedTasks()">
       <ion-item-divider detail-push>Completed Tasks</ion-item-divider>
-
       <div *ngFor="let comptask of completedTasks; let i=index">
         <ion-item no-lines text-wrap *ngIf="i<3">
           <p item-start>-</p>
@@ -29,13 +27,10 @@
           <p item-end>{{comptask.User}}</p>
         </ion-item>
       </div>
-
     </ion-row>
 
     <ion-row (click) = "viewTasks()">
-
       <ion-item-divider detail-push>Outstanding Tasks</ion-item-divider>
-
       <div *ngFor="let task of otherTasks; let i=index">
         <ion-item no-lines text-wrap *ngIf="i<3">
           <p item-start>-</p>

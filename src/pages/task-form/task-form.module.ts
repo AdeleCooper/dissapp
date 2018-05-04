@@ -10,4 +10,5 @@ import { TaskFormPage } from './task-form';
     IonicPageModule.forChild(TaskFormPage),
   ],
 })
+
 export class TaskFormPageModule {}

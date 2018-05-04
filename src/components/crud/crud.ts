@@ -30,8 +30,6 @@ export class CrudComponent {
 
   constructor(public afAuth: AngularFireAuth, afs: AngularFirestore) {
     this.afAuth.auth.signInAnonymously();
-    //this.productsCollectionRef = this.afs.collection('products'); 
     this.products = this.productsCollectionRef.valueChanges();
   }
-
 }

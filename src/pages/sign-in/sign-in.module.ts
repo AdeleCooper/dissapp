@@ -10,4 +10,5 @@ import { SignInPage } from './sign-in';
     IonicPageModule.forChild(SignInPage),
   ],
 })
+
 export class SignInPageModule {}

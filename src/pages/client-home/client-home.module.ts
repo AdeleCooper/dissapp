@@ -10,4 +10,5 @@ import { ClientHomePage } from './client-home';
     IonicPageModule.forChild(ClientHomePage),
   ],
 })
+
 export class ClientHomePageModule {}

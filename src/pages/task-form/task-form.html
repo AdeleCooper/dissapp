@@ -8,9 +8,6 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>{{title}}
-      <!-- <button ion-button icon-only>
-        <ion-icon name="close"></ion-icon>
-      </button> -->
     </ion-title>
     <ion-buttons start>
       <button ion-button color="dark" (click)="dismiss()">
@@ -21,17 +18,12 @@
   </ion-toolbar>
 </ion-header>
 
-<!-- TODO: change ngModels to what task should be - look up drop downs change database fields to match names -->
 <ion-content padding>
   <form (ngSubmit)="addTask()">
     <ion-item>
       <ion-label>Task Name</ion-label>
       <ion-input type="text" [(ngModel)]="task.Description" name="Description"></ion-input>
     </ion-item>
-    <!-- <ion-item>
-      <ion-label>Task Size</ion-label>
-      <ion-textarea [(ngModel)]="task.Size" name="Size"></ion-textarea>
-    </ion-item> -->
     <ion-item>
       <ion-label>Task Size</ion-label>
       <ion-select [(ngModel)]="task.Size" name="Size">
@@ -42,5 +34,4 @@
     </ion-item>
     <button ion-button type="submit" block>{{title}}</button>
   </form>
-
 </ion-content>

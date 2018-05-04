@@ -22,24 +22,17 @@ export class TaskFormPage {
     if (task) {
       this.task = task;
       this.title = "Edit Task";
-      console.info('task id: '+ task.id);
     } else {
       this.task.Size = "M";
       this.title = "Add Task";
     }
-    console.info('task: '+ task);
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad TaskFormPage');
   }
 
   addTask() {
     this.viewCtrl.dismiss(this.task);
   }
-  
+
   dismiss() {
-    console.log(this.task);
     this.viewCtrl.dismiss();
-  }  
+  }
 }

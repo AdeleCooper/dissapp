@@ -16,27 +16,15 @@ import { SignUpPage } from '../sign-up/sign-up';
 })
 export class SignUpOnboardingPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SignUpOnboardingPage');
-  }
+  constructor(public navCtrl: NavController, public navParams: NavParams) { }
 
   clientClicked(){
-    var client = {
-      Type: "Client"
-    }
+    var client = { Type: "Client" }
     this.navCtrl.push(SignUpPage, client);
-
   }
 
   plannerClicked(){
-    var planner = {
-      Type: "Planner"
-    }
+    var planner = { Type: "Planner" }
     this.navCtrl.push(SignUpPage, planner);
-
   }
-
 }

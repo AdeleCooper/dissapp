@@ -32,13 +32,9 @@ export class TasksPage {
     this.active = this.navParams.get('Active');
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad TasksPage');
-  }
-
   deleteTask(task) {
-    console.log("delete");
     var self = this;
+
     this.tasksService.deleteTask(task.id, this.sprintid, this.tasks).then((remainingTasks) => {
       for (var i = 0; i < self.tasks.length; i++) {
         if (self.tasks[i].id == task.id) {
@@ -49,22 +45,18 @@ export class TasksPage {
       self.sprintsService.updateTasks(remainingTasks, self.sprintid);
 
       if (self.active) {
-        console.log("hewwooo delete");
         self.events.publish('tasks:changed', { tasks: self.tasks});
       }
     });
   }
 
   editTask(task) {
-    console.log("edit");
-
     var self = this;
     var formParams = { Task: task};
     let modal = this.modalCtrl.create(TaskFormPage, formParams);
 
     modal.onDidDismiss(data => {
         if (!data) {
-          console.info('task add cancelled');
           return;
         }
 
@@ -73,22 +65,19 @@ export class TasksPage {
           task.Size = data.Size;
 
           if (self.active) {
-            console.log("edit tasks success - publishing event");
             self.events.publish('tasks:changed', { tasks: self.tasks});
           }          
         });
     });
     modal.present();    
-
   }
 
   addTask() {
     var self = this;
-    //create task form modal 
     let modal = this.modalCtrl.create(TaskFormPage);
+
     modal.onDidDismiss(data => {
         if (!data) {
-          console.info('add task cancelled');
           return;
         }
         self.tasksService.addTask(data, self.sprintid, self.tasks).then((doc) => {
@@ -101,7 +90,5 @@ export class TasksPage {
         });
     });
     modal.present();
-
   }
 }
-

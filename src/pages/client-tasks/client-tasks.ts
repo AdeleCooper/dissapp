@@ -22,7 +22,7 @@ export class ClientTasksPage {
   public tasks: any = [];
   public clientTasks: any = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController,
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,
     public clientsService: ClientsProvider, public tasksService: TasksProvider) {
     this.client = this.navParams.get('Client');
     this.clientId = this.navParams.get('Id');
@@ -30,41 +30,33 @@ export class ClientTasksPage {
     this.getTasks();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ClientTasksPage');
-  }
-
-
   addTask() {
     var self = this;
     let modal = this.modalCtrl.create(TaskFormPage);
 
     modal.onDidDismiss(data => {
-        if (!data) {
-          console.info('task add cancelled');
-          return;
-        }
-        self.tasksService.addClientTask(data).then((doc) => {
-          data.id = doc.id;
-          self.tasks.push(doc.id);
-          self.tasksService.editTask(data);
-          self.clientTasks.push(data);
-          self.clientsService.updateClient(self.clientId, {Tasks: self.tasks});
-        });
+      if (!data) {
+        return;
+      }
+
+      self.tasksService.addClientTask(data).then((doc) => {
+        data.id = doc.id;
+        self.tasks.push(doc.id);
+        self.tasksService.editTask(data);
+        self.clientTasks.push(data);
+        self.clientsService.updateClient(self.clientId, { Tasks: self.tasks });
+      });
     });
     modal.present();
   }
 
-  getTasks(){
-    //this.clientTasks = [];
+  getTasks() {
     var self = this;
     this.client.Tasks.forEach(task => {
       self.tasksService.getTask(task).then((doc) => {
         var temp = doc.data();
         self.clientTasks.push(doc.data());
-        //console.log("tooo"+temp.Description);
       })
     });
-
   }
 }

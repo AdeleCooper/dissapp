@@ -30,25 +30,17 @@ export class ClientsPage {
     this.plannerId = this.navParams.get('PlannerId');
     var self = this;
     this.populateClientsArray();
-
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ClientsPage');
-  }
-
-  clientClicked(client,i){
+  clientClicked(client,i) {
     var data = { 
       Client: client,
       Id: this.clientIds[i]
     };
     this.navCtrl.push(ClientTasksPage, data);
-
   }
 
   addClient(){
-    console.log("add client");
-    console.log(this.newClientId);
     this.clientIds.push(this.newClientId);
     var self = this;
     var data = {
@@ -58,21 +50,16 @@ export class ClientsPage {
       self.populateClientsArray();
       self.events.publish('clients:changed', { clients: self.clientIds});
     })
-
-
   }
 
   populateClientsArray(){
     this.clientsData = [];
     var self = this;
     this.clientIds.forEach(element => {
-      console.log('client id: ' + element);
       this.clientsService.getClient(element).then((doc) => {
         var client= doc.data();
         self.clientsData.push(client);
       });
-      
     });
   }
-
 }

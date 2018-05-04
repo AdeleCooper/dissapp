@@ -35,23 +35,14 @@ export class PlannerHomePage {
   public progressBarValue: any;
   public plannerId: any;
 
-  //TODO: sign out button that logs out and either refreshes app or sets root page to log back in
-
   constructor(public afAuth: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams, public sprintsService: SprintsProvider, public tasksService: TasksProvider, public plannersService: PlannersProvider, public events: Events) {
-    console.log("Planner Home page constructor");
-    console.log("inside planner home" + this.navParams.get("id"));
     this.plannerId = this.navParams.get("id");
     this.getPlannerInfo(this.navParams.get("id"));
     var self = this;
     this.events.subscribe('clients:changed', (data) => {
       self.clients = data.clients;
       self.clientNumber = self.clients.length;
-      console.log("subscribe ps" + data.clients);
     });
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PlannerHomePage');
   }
 
   getCurrentSprint() {
@@ -61,36 +52,32 @@ export class PlannerHomePage {
     this.taskCount = 0;
     var self = this;
 
-    this.sprintsService.getSprintCollection(/*'9uovgQw0zVKFdMyMJXNz'*/).then((doc) => {
+    this.sprintsService.getSprintCollection().then((doc) => {
       if (doc) {
-        //var x = doc.data();
+        if (doc.data().ActiveSprint) {
+          self.sprintId = doc.data().ActiveSprint;
 
-        if (doc.data().ActiveSprint){
-        self.sprintId = doc.data().ActiveSprint;
-        
-
-        self.sprintsService.getSprint(self.sprintId).then((doc) => {
-          var sprint = doc.data();
-          self.currentSprint = sprint;
-          self.taskCount = 0 - self.currentSprint.CompletedTasks;
-          if (sprint.Tasks) {
-            sprint.Tasks.forEach(task => {
-              self.tasksService.getTask(task).then((doc) => {
-                var task = doc.data();
-                self.currentSprintTasks.push(task);
-                self.taskCount += 1;
-              })
-            });
-          }
-          if (sprint.Tasks && sprint.Tasks.length) {
-            self.progressBarValue = Math.round(self.currentSprint.CompletedTasks / sprint.Tasks.length * 100);
-          } else {
-            self.progressBarValue = 0;
-          }
-          console.log(self.currentSprint.CompletedTasks +"/"+sprint.Tasks.length + " = " + self.progressBarValue);
-          (<HTMLInputElement>document.getElementById('progressbar')).value = self.progressBarValue;
-        });
-      }
+          self.sprintsService.getSprint(self.sprintId).then((doc) => {
+            var sprint = doc.data();
+            self.currentSprint = sprint;
+            self.taskCount = 0 - self.currentSprint.CompletedTasks;
+            if (sprint.Tasks) {
+              sprint.Tasks.forEach(task => {
+                self.tasksService.getTask(task).then((doc) => {
+                  var task = doc.data();
+                  self.currentSprintTasks.push(task);
+                  self.taskCount += 1;
+                })
+              });
+            }
+            if (sprint.Tasks && sprint.Tasks.length) {
+              self.progressBarValue = Math.round(self.currentSprint.CompletedTasks / sprint.Tasks.length * 100);
+            } else {
+              self.progressBarValue = 0;
+            }
+            (<HTMLInputElement>document.getElementById('progressbar')).value = self.progressBarValue;
+          });
+        }
       }
     }).catch((error: any) => {
       console.error("getSprint - error received: " + error);
@@ -104,10 +91,8 @@ export class PlannerHomePage {
       if (doc) {
         self.planner = doc.data();
         self.clients = self.planner.Clients;
-        console.log(self.planner.Name);
         self.name = self.planner.Name;
         self.clientNumber = self.planner.Clients.length;
-        console.log(self.clientNumber);
         self.sprintsService.setSprintCollectionId(self.planner.SprintCollectionID);
         this.getCurrentSprint();
       }
@@ -116,26 +101,23 @@ export class PlannerHomePage {
       console.error("getSprint - error received: " + error);
     });
   }
-  
+
   sprintsClicked() {
-    //var data = { Clients: this.clients};
     this.navCtrl.push(SprintsPage);
   }
 
   clientsClicked() {
-    var data = { Clients: this.clients, PlannerId: this.plannerId};
+    var data = { Clients: this.clients, PlannerId: this.plannerId };
     this.navCtrl.push(ClientsPage, data);
   }
+
   logOut() {
-    console.log("logout");
     var self = this;
     this.afAuth.auth.signOut().then(function () {
       // Sign-out successful.
-      console.log("success");
       self.navCtrl.setRoot(SignInPage);
     }, function (error) {
-      // An error happened.
-      console.log("error");
+      console.log("Log out error: " + error);
     });
   }
 }

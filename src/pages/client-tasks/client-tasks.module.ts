@@ -10,4 +10,5 @@ import { ClientTasksPage } from './client-tasks';
     IonicPageModule.forChild(ClientTasksPage),
   ],
 })
+
 export class ClientTasksPageModule {}

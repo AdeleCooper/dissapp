@@ -10,7 +10,6 @@ import { UsersProvider } from '../../providers/users/users';
 import { SprintCollectionsProvider } from '../../providers/sprint-collections/sprint-collections';
 import { PlannersProvider } from '../../providers/planners/planners';
 
-
 /**
  * Generated class for the SignUpPage page.
  *
@@ -35,23 +34,15 @@ export class SignUpPage {
     this.type = this.navParams.get("Type");
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SignUpPage');
-  }
-
   signIn() {
     this.navCtrl.setRoot(SignInPage);
   }
 
   async signUp(email, password) {
-    console.log(email);
-    console.log(password);
     try {
       const result = await this.afAuth.auth.createUserWithEmailAndPassword(email, password);
-      console.log(result.uid);
 
       if (this.type == "Client") {
-        console.log("client created");
         this.toast.create({
           message: "Account Created - Welcome!",
           duration: 5000
@@ -59,7 +50,6 @@ export class SignUpPage {
         this.setUpClient(result.uid);
 
       } else if (this.type == "Planner") {
-        console.log("planner created");
         this.toast.create({
           message: "Account Created - Welcome!",
           duration: 5000
@@ -75,7 +65,6 @@ export class SignUpPage {
       }
     } catch (e) {
       this.errorMessage = e.message;
-      console.error(e.message);
       this.toast.create({
         message: e.message,
         duration: 3000
@@ -92,6 +81,7 @@ export class SignUpPage {
       Tasks: []
     }
     var self = this;
+
     this.clientsService.addClient(clientData).then((doc) => {
       var id = doc.id;
       var userData = {
@@ -101,10 +91,9 @@ export class SignUpPage {
       var updateData = {
         ID: id
       }
+
       self.clientsService.updateClient(id, updateData).then((doc) => {
-        console.log("client id updated!");
         self.usersService.createUser(uid, userData).then((doc) => {
-          console.log('complete!');
           this.navCtrl.setRoot(ClientHomePage, { id: id });
         });
       });
@@ -113,8 +102,7 @@ export class SignUpPage {
 
   setUpPlanner(uid) {
     var self = this;
-    this.sprintCollectionsService.addSprintCollection({ Sprints: [], ActiveSprint: null}).then((doc) => {
-      console.log(doc.id);
+    this.sprintCollectionsService.addSprintCollection({ Sprints: [], ActiveSprint: null }).then((doc) => {
       var plannerData = {
         Name: self.username1,
         Location: self.location1,
@@ -127,15 +115,9 @@ export class SignUpPage {
           Type: "Planner"
         }
         self.usersService.createUser(uid, userData).then((doc) => {
-          console.log('added planner!');
           this.navCtrl.setRoot(PlannerHomePage, { id: doc2.id });
         });
-
       })
-
-
     })
   }
-
-
 }

@@ -10,4 +10,5 @@ import { TasksPage } from './tasks';
     IonicPageModule.forChild(TasksPage),
   ],
 })
+
 export class TasksPageModule {}

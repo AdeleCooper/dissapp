@@ -3,11 +3,10 @@ import { IonicPageModule } from 'ionic-angular';
 import { PlannerHomePage } from './planner-home';
 
 @NgModule({
-  declarations: [
-    //PlannerHomePage,
-  ],
+  declarations: [],
   imports: [
     IonicPageModule.forChild(PlannerHomePage),
   ],
 })
+
 export class PlannerHomePageModule {}

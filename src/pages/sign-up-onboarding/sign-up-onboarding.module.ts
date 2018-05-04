@@ -10,4 +10,5 @@ import { SignUpOnboardingPage } from './sign-up-onboarding';
     IonicPageModule.forChild(SignUpOnboardingPage),
   ],
 })
+
 export class SignUpOnboardingPageModule {}

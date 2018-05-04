@@ -29,39 +29,26 @@ export class SignInPage {
     public sprintsService: SprintsProvider, public usersService: UsersProvider, public toast: ToastController) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SignInPage');
-  }
-
   signUp() {
     this.navCtrl.push(SignUpOnboardingPage);
   }
 
   async signIn(email, password) {
-    console.log(email);
-    console.log(password);
     try {
       const result = await this.afAuth.auth.signInWithEmailAndPassword(email, password);
-      console.log(result.uid);
       var uid = result.uid;
-      console.log(uid);
+
       this.usersService.getUser(uid).then((doc) => {
-        //console.log(doc.data);
         var dataReturned = doc.data();
-        console.log("get user: "+dataReturned.ID);
         var data = {
           id: dataReturned.ID
         }
+
         if (dataReturned.Type == "Planner") {
           this.navCtrl.setRoot(PlannerHomePage, data);
         } else if (dataReturned.Type == "Client") {
           this.navCtrl.setRoot(ClientHomePage, data);
-
         }
-        //push page sending planner id.
-        //if type is palnner
-        //elswe push other page
-
       });
     } catch (e) {
       this.errorMessage = e.message;

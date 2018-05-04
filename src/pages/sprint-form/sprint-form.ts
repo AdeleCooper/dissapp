@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
-// import { DatePicker } from '@ionic-native/date-picker';
-// import { DatePickerModule } from 'ion-datepicker';
 
 /**
  * Generated class for the SprintFormPage page.
@@ -34,19 +32,11 @@ export class SprintFormPage {
     }
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SprintFormPage');
-  }
-
   addSprint() {
-    //var json = JSON.stringify(this.sprint);
-    //console.log("json string: " + json);
-
     this.viewCtrl.dismiss(this.sprint);
   }
 
   dismiss() {
-    console.log(this.sprint);
     this.viewCtrl.dismiss();
   }
 }

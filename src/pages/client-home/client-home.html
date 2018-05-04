@@ -5,30 +5,20 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
     <ion-title>
       <p>Welcome, {{name}}!</p>
     </ion-title>
     <p (click)="logOut()">Log Out</p>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
-  <p>
-    <strong>Type: </strong>Client</p>
-  <p>
-    <strong>Location: </strong>{{location}}</p>
-  <p>
-    <strong>ID: </strong>{{clientId}}</p>
-  <p>
-    Give the ID to your planner so they can add you to their system.</p>
-
-   <button ion-button (click)="refresh()">Refresh
-    </button>
-
+  <p><strong>Type: </strong>Client</p>
+  <p><strong>Location: </strong>{{location}}</p>
+  <p><strong>ID: </strong>{{clientId}}</p>
+  <p>Give the ID to your planner so they can add you to their system.</p>
+   <button ion-button (click)="refresh()">Refresh</button>
   <p>
     <strong>Tasks:</strong>
   </p>
@@ -36,7 +26,5 @@
     <ion-item *ngFor="let task of tasks">
       {{task.Description}}
     </ion-item>
-
   </ion-list>
-
 </ion-content>

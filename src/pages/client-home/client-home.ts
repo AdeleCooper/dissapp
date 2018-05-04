@@ -26,14 +26,8 @@ export class ClientHomePage {
   public tasks: any = [];
 
   constructor(public afAuth: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams, public tasksService: TasksProvider, public clientsService: ClientsProvider) {
-    console.log("made it" + this.navParams.get('id'));
     this.clientId = this.navParams.get('id');
     this.getClient();
-
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ClientHomePage');
   }
 
   getClient() {
@@ -41,14 +35,11 @@ export class ClientHomePage {
     var self = this;
     this.clientsService.getClient(this.clientId).then((doc) => {
       self.clientData = doc.data();
-      console.log(self.clientData);
       self.name = self.clientData.Name;
       self.location = self.clientData.Location;
       self.taskids = self.clientData.Tasks;
       self.getTasks();
     });
-
-
   }
 
   getTasks() {
@@ -67,16 +58,13 @@ export class ClientHomePage {
   }
 
   logOut() {
-    console.log("logout");
     var self = this;
     this.afAuth.auth.signOut().then(function () {
       // Sign-out successful.
-      console.log("success");
       self.navCtrl.setRoot(SignInPage);
     }, function (error) {
       // An error happened.
-      console.log("error");
+      console.log("Sign out error: " + error);
     });
   }
-
 }

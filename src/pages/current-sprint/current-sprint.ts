@@ -26,10 +26,9 @@ export class CurrentSprintPage {
   tasks: any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public modalCtrl: ModalController,
-    public tasksService: TasksProvider, public sprintsService: SprintsProvider, public events: Events) {
-    //his.taskIds = this.navParams.get('Tasks');
-    this.currentSprint = {
+    public modalCtrl: ModalController, public tasksService: TasksProvider,
+    public sprintsService: SprintsProvider, public events: Events) {
+      this.currentSprint = {
       Title: this.navParams.get('Title'),
       StartDate: this.navParams.get('StartDate'),
       EndDate: this.navParams.get('EndDate'),
@@ -41,24 +40,7 @@ export class CurrentSprintPage {
       ID: this.navParams.get('id')
     };
     this.sprintid = this.navParams.get('id');
-    console.log(this.taskIds);
     this.getTaskIds();
-    //var self = this;
-    //this.getTasks();
-
-    // Subscribe to changes made to the list of tasks on the Tasks page
-    // this.events.subscribe('tasks:changed', (data) => {
-    //   if (data.title == 'Completed Tasks') {
-    //     self.completedTasks = data.tasks;
-    //   } else if (data.title == 'Outstanding Tasks') {
-    //     self.otherTasks = data.tasks;
-    //   }
-    // });
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CurrentSprintPage');
-    console.log(this.currentSprint);
   }
 
   getTaskIds(){
@@ -111,7 +93,6 @@ export class CurrentSprintPage {
   }
 
   editSprint() {
-    console.log("editSprint called");
     var self = this;
     var formParams = { Sprint: this.currentSprint };
 
@@ -119,11 +100,8 @@ export class CurrentSprintPage {
 
     modal.onDidDismiss(data => {
       if (!data) {
-        console.log("editSprint cancelled");
         return;
       } else {
-        console.log("editSprint done - updating database");
-
         data.Tasks = self.taskIds;
         self.sprintsService.editSprint(data).then((doc) => {
           //self.getSprints();
@@ -135,11 +113,6 @@ export class CurrentSprintPage {
 
           self.events.publish('sprint:changed', { sprint: self.currentSprint });
         });
-
-        // self.sprintsService.addSprint(data).then((doc) => {
-        //   self.getSprints();
-        //   console.log("inside .then")
-        // });
       }
     });
     modal.present();    

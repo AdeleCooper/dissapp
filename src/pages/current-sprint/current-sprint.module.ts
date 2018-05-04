@@ -10,4 +10,5 @@ import { CurrentSprintPage } from './current-sprint';
     IonicPageModule.forChild(CurrentSprintPage),
   ],
 })
+
 export class CurrentSprintPageModule {}

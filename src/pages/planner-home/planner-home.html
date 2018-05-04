@@ -41,7 +41,6 @@
         <p>{{progressBarValue}}% Complete</p>
       </ion-col>
     </ion-row>
-
     <ion-row (click)="sprintsClicked()" style="width: 100%; text-align: center; background-color: white;">
       <ion-item-divider detail-push>Current Sprint: Upcoming</ion-item-divider>
       <div *ngFor="let task of currentSprintTasks;let i=index">
